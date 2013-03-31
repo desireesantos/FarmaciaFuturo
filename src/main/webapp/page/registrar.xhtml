@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SIPA</title>
+
+</h:head>
+<h:body>
+	<h:form id="menuForm">
+		<p:layout fullPage="true">
+
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: small; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Tela Login -->
+			<p:layoutUnit position="center">
+
+
+				<center>
+					<br />
+
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage value="/img/img_headerSIPA.png" height=" 200"
+							width="1000" />
+
+					</h:panelGrid>
+
+
+					<!-- Inicio Logar -->
+					<p:growl id="messages" life="3000" />
+
+					<h:panelGrid id="gridLogar" columns="2" style="margin-top:10px"
+						ajax="false">
+
+						<h:outputText value="Nome Completo: " />
+						<p:inputText id="nome"
+							value="#{administradorMB.administrador.nome}" size="50"
+							required="true" label="Nome Completo" />
+
+						<h:outputText value="Email: " />
+						<p:inputText id="email"
+							value="#{administradorMB.administrador.email}" size="50"
+							required="true" label="Email">
+							<f:validator validatorId="EmailValidator" />
+						</p:inputText>
+
+						<h:outputText value="Senha: " />
+						<p:password id="senha"
+							value="#{administradorMB.administrador.senha}" feedback="true"
+							size="10" required="true" label="Senha" />
+
+
+						<center>
+							<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
+								action="#{administradorMB.salvar}" />
+						</center>
+
+
+					</h:panelGrid>
+
+
+					<br /> <br /> <br /> <br />
+					<h:outputText value="Clique "
+						style="FONT-SIZE: medium;margin-left:220px;" />
+					<h:link value="aqui" outcome="login" style="FONT-SIZE: medium;" />
+					<h:outputText value=" para retornar" style="FONT-SIZE: medium;" />
+
+				</center>
+
+
+
+
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

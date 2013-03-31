@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SIPA</title>
+<style type="text/css">
+html,body {
+	height: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	position: relative !important;
+}
+</style>
+</h:head>
+<h:body>
+	<h:form id="menuForm">
+		<p:layout fullPage="true">
+
+			<!-- Banner TOPO -->
+			<p:layoutUnit position="north" size="50">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: xx-large; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner TOPO -->
+
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<h:outputLabel value="Conectividade: " style="font-weight:bold" />
+				<h:outputText value="#{trocarTema.nomeConectividade}"
+					style="FONT-SIZE: medium;" />
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Banner CARROSEL -->
+			<p:layoutUnit position="east" size="200">
+				<p:carousel rows="1" itemStyle="height:454px;width:180px;"
+					autoPlayInterval="4000" effect="elasticIn" circular="true">
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_enquete.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+				</p:carousel>
+			</p:layoutUnit>
+			<!-- Fim Banner CARROSEL -->
+
+
+
+			<!-- Banner Conteúdo Principal -->
+			<p:layoutUnit position="center">
+
+				<p:menubar>
+					<p:menuitem value="Home"
+						url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+						icon="ui-icon-home" />
+					<!-- 	     Início Menu Conectividade  -->
+					<p:submenu label="Conectividade" icon="ui-icon-gear">
+
+						<p:menuitem value="Controle Remoto" style="font-size:16"
+							ajax="false">
+
+							<f:setPropertyActionListener value="humanity"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Controle Remoto"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Bluetooth" ajax="false">
+							<f:setPropertyActionListener value="start"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Bluetooth"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Web" ajax="false">
+							<f:setPropertyActionListener value="sunny"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Web"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+					</p:submenu>
+					<!-- 	     Fim Menu Conectividade     -->
+
+
+
+					<!-- Início Menu Questionário - Cadastrar Perguntas  -->
+					<p:submenu label="Questionario" icon="ui-icon-pencil">
+
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+
+						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
+					</p:submenu>
+					<!-- Fim Menu Questionario -->
+
+					<!-- Menu Relatório  -->
+					<p:submenu label="Relatório" icon="ui-icon-document">
+
+						<p:menuitem value="Gerar Relatório" url="buscar.xhtml"
+							style="font-size:16" ajax="false" />
+
+					</p:submenu>
+					<!-- Fim Menu Relatório  -->
+
+					<!-- Menu Ajuda  -->
+					<p:submenu label="Ajuda" icon="ui-icon-info">
+
+						<p:menuitem value="Manual do usuario" url="manualUsuario.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Crédito" url="credito.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Versão" url="versao.xhtml" style="font-size:16"
+							ajax="false" />
+
+
+					</p:submenu>
+					<!-- Fim Menu Relatório  -->
+
+				</p:menubar>
+
+
+				<!--  Versão -->
+				<center>
+					<p:accordionPanel>
+						<p:tab title="SIPA - Versão 1.0">
+							<h:panelGrid columns="2" cellpadding="10">
+								<p:graphicImage value="/img/logo_sipa.jpg" />
+								<h:outputText
+									value="
+				       
+				       Desenvolvedores: Alexsandro Santos, 
+				                        Desiree dos Santos e 
+				                        Pátricia Cunha
+				                        
+				                        " />
+							</h:panelGrid>
+						</p:tab>
+
+					</p:accordionPanel>
+
+
+				</center>
+				<!-- Versão -->
+
+
+
+
+
+
+
+
+
+
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

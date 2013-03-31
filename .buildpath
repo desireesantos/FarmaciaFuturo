@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry external="true" kind="lib" path="/Users/desireesantos/.m2/repository/org/primefaces/primefaces/3.2/primefaces-3.2.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/desireesantos/.m2/repository/com/sun/faces/jsf-api/2.0.0-b13/jsf-api-2.0.0-b13.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/desireesantos/.m2/repository/com/sun/faces/jsf-impl/2.1.7/jsf-impl-2.1.7.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/desireesantos/.m2/repository/org/glassfish/javax.faces/2.1.7/javax.faces-2.1.7.jar"/>
+</buildpath>

@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>SIPA</title>
+</h:head>
+<h:body>
+
+	<h:form id="trocaTemaForm">
+
+		<p:menubar>
+<p:menuitem value="Home" url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml" icon="ui-icon-home" />
+			<!-- 	     Início Menu Conectividade -->
+			<p:submenu label="Conectividade" icon="ui-icon-gear">
+
+				<p:menuitem value="Controle Remoto" style="font-size:16" ajax="false">
+					<f:setPropertyActionListener value="aristo"
+						target="#{trocarTema.tema}" />
+				</p:menuitem>
+
+				<p:menuitem value="Bluetooth" ajax="false">
+					<f:setPropertyActionListener value="start"
+						target="#{trocarTema.tema}" />
+				</p:menuitem>
+
+				<p:menuitem value="Web" ajax="false">
+					<f:setPropertyActionListener value="sunny"
+						target="#{trocarTema.tema}" />
+				</p:menuitem>
+
+			</p:submenu>
+			<!-- 	     Fim Menu Conectividade     -->
+
+
+
+			<!-- 	     Início Menu Questionário - Cadastrar Perguntas  -->
+			<p:submenu label="Questionario" icon="ui-icon-pencil">
+
+				<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+
+
+				<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />				
+
+			</p:submenu>
+			<!-- 	      Fim Menu Questionario -->
+			
+			
+				<!-- Menu Relatório  -->
+					<p:submenu label="Relatório" icon="ui-icon-document">
+
+						<p:menuitem value="Gerar Relatório" url="prebusca.xhtml" style="font-size:16" ajax="false" />
+						
+					</p:submenu>			
+		</p:menubar>
+		 	<!-- Fim Menu Relatório  -->
+		
+
+
+		<center>
+			<h1>Buscar Questionário</h1>
+
+			<!-- Início  PreBusca -->
+			
+
+					<h:panelGrid id="gridPergunta" columns="3" style="margin-top:10px">
+						
+						 <p:autoComplete id="textoSelecionado" value="#{cadastrarPergunta.autoComplete}" completeMethod="#{perguntas.prebusca}" multiple="true" size="50"/>  
+					
+					</h:panelGrid>
+					
+					<p:button outcome="relatorio" value="Buscar" icon="ui-icon-circle-check" />  
+   								
+			<!--    Fim PreBusca -->
+			
+
+			<br /> 
+			<br />
+
+		</center>
+
+	</h:form>
+
+</h:body>
+</html>

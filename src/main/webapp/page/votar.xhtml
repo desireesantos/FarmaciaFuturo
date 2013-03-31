@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SIPA</title>
+	<style type="text/css">
+html,body {
+	height: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	position: relative !important;
+}
+</style>
+
+</h:head>
+<h:body>
+	<h:form id="menuForm">
+		<p:layout fullPage="true">
+
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: small; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Tela Votar -->
+			<p:layoutUnit position="center">
+				<center>
+
+					<h:panelGrid id="imagemVoto" columns="2" cellpadding="3"
+						style="margin-left:100px;">
+						<br />
+						<br />
+						<br />
+						<br />
+						<p:spacer width="40" />
+						<h:outputText
+							value=" Votação no SIPA é rápido, fácil e gratuito !"
+							style="FONT-SIZE: x-large; font-weight: bold;" />
+						<p:spacer width="100" />
+
+					</h:panelGrid>
+
+
+					<!-- Inicio Voto -->
+					<p:growl id="messages" life="4000" />
+
+					<h:panelGrid id="gridVoto" columns="2" style="margin-top:10px"
+						ajax="false">
+
+						<h:outputLabel value="Nome Completo: " />
+						<p:inputText id="name" value="#{usuarioMB.usuario.nome}"
+							required="true" label="Nome Completo" size="30">
+							<f:validateLength minimum="5" />
+						</p:inputText>
+
+						<h:outputText value="Resposta Correta: " />
+						<p:keyboard id="RespostaCerta"
+							value="#{usuarioMB.usuario.resposta}" required="true"
+							maxlength="1" layout="custom" layoutTemplate="12-clear,34-close"
+							size="5" effect="fadeIn" closeLabel="fecha" clearLabel="limpa"
+							label="Resposta Certa" onmouseup="trocartexto(this)">
+							<f:validator validatorId="KeyValidator" />
+						</p:keyboard>
+
+						<br />
+						<br />
+						<br />
+						<br />
+
+
+
+						<p:commandButton id="botaoSalvar" value="Votar" ajax="false"
+							icon="ui-icon-circle-check" action="#{usuarioMB.salvar}"
+							style="margin-left:140px;" />
+
+
+					</h:panelGrid>
+
+					<br /> <br /> <br /> <br />
+					<h:outputText value="Clique "
+						style="FONT-SIZE: medium;margin-left:220px;" />
+					<h:link value="aqui" outcome="login" style="FONT-SIZE: medium;" />
+					<h:outputText value=" para retornar" style="FONT-SIZE: medium;" />
+
+
+				</center>
+
+				<!--  Fim Botão registrar e votar -->
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="refresh" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<title>SIPA</title>
+
+	<style type="text/css">
+html,body {
+	height: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	position: relative !important;
+}
+</style>
+
+</h:head>
+<h:body>
+
+	<h:form id="formBuscar">
+		<p:layout fullPage="true">
+
+			<!-- Banner TOPO -->
+			<p:layoutUnit position="north" size="50">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: xx-large; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner TOPO -->
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<h:outputLabel value="Conectividade: " style="font-weight:bold" />
+				<h:outputText value="#{trocarTema.nomeConectividade}" />
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+			<!-- Banner CARROSEL -->
+			<p:layoutUnit position="east" size="200">
+				<p:carousel rows="1" itemStyle="height:400px;width:160px;"
+					autoPlayInterval="4000" effect="elasticIn" circular="true">
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_enquete.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+				</p:carousel>
+			</p:layoutUnit>
+			<!-- Fim Banner CARROSEL -->
+
+
+
+			<!-- Banner Conteúdo Principal -->
+			<p:layoutUnit position="center">
+
+				<p:menubar>
+					<p:menuitem value="Home"
+						url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+						icon="ui-icon-home" />
+
+					<!-- 	     Início Menu Conectividade  -->
+					<p:submenu label="Conectividade" icon="ui-icon-gear">
+
+						<p:menuitem value="Controle Remoto" style="font-size:16"
+							ajax="false">
+
+							<f:setPropertyActionListener value="humanity"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Controle Remoto"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Bluetooth" ajax="false">
+							<f:setPropertyActionListener value="start"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Bluetooth"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Web" ajax="false">
+							<f:setPropertyActionListener value="sunny"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Web"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+					</p:submenu>
+					<!-- 	     Fim Menu Conectividade     -->
+
+
+					<!-- Menu Questionário   -->
+					<p:submenu label="Questionario" icon="ui-icon-pencil">
+
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+
+						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
+
+						<!-- Fim Menu Questionario -->
+
+					</p:submenu>
+
+					<!-- Fim Menu Questionário   -->
+
+
+					<!-- Menu Relatório  -->
+					<p:submenu label="Relatorio" icon="ui-icon-document">
+
+						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
+							ajax="false" />
+
+					</p:submenu>
+					<!-- Fim Menu Relatório -->
+
+
+					<!-- Menu Ajuda  -->
+					<p:submenu label="Ajuda" icon="ui-icon-info">
+
+						<p:menuitem value="Manual Uso" url="manualUsuario.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Crédito" url="credito.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Versão" url="versao.xhtml" style="font-size:16"
+							ajax="false" />
+
+					</p:submenu>
+				</p:menubar>
+				<!-- Fim Menu    -->
+
+
+
+				<!-- Conteúdo Buscar -->
+				<center>
+					<h3>Buscar Questionário</h3>
+
+					<p:growl id="avisos" showDetail="true" life="2000"
+						style="font-size:16" />
+					<p:dataTable id="questionario" var="perg" 
+						value="#{perguntas.listarCadastrarPerguntas}"
+						selection="#{perguntas.cadastrarPergunta}" selectionMode="single"
+						style="width:94%" paginator="true" rows="10" rowKey="#{perg.id}"
+						emptyMessage="Nenhuma pergunta cadastrada.">
+
+						<p:ajax event="rowEdit" update=":formBuscar:questionario"
+							listener="#{perguntas.onEditRow}" />
+							
+						<p:poll interval="2" listener="#{perguntas.listarCadastrarPerguntas}" update="@all" autoStart="false" />	
+
+						<p:column headerText="Pergunta" style="width:auto" id="pergunta">
+							<p:cellEditor id="pergunta_editor">
+								<f:facet name="output">
+									<h:outputText value="#{perg.value}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{perg.value}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="1" style="width:16px" id="resposta1">
+							<p:cellEditor id="pergunta_editor1">
+								<f:facet name="output">
+									<h:outputText value="#{perg.resposta1}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{perg.resposta1}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="2" style="width:auto" id="resposta2">
+							<p:cellEditor id="pergunta_editor2">
+								<f:facet name="output">
+									<h:outputText value="#{perg.resposta2}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{perg.resposta2}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="3" style="width:auto" id="resposta3">
+							<p:cellEditor id="pergunta_editor3">
+								<f:facet name="output">
+									<h:outputText value="#{perg.resposta3}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{perg.resposta3}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="4" style="width:auto" id="resposta4">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{perg.resposta4}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{perg.resposta4}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
+
+						<p:rowExpansion>
+							<h:panelGrid id="display" columns="2" cellpadding="4"
+								style="width:300px;" styleClass="ui-state-highlight"
+								columnClasses="label, value" update=":formBuscar:questionario">
+
+								<h:selectOneMenu value="#{perg.respostaCorreta}">
+									<f:selectItems value="#{perguntas.opcoes}" var="man"
+										itemLabel="#{man}" itemValue="#{man}" />
+								</h:selectOneMenu>
+
+							</h:panelGrid>
+
+						</p:rowExpansion>
+
+						<p:column id="editarColuna" headerText="Editar"
+							value="#{perguntas.onRenderCorreta}" style="width:auto">
+							<p:rowEditor value="{perguntas.valorbooleano}" />
+							<h:commandLink actionListener="#{perguntas.excluir}"
+								styleClass="ui-icon ui-icon-trash" update="avisos" />
+						</p:column>
+
+
+						<p:column id="ativar" style="width:4%" headerText="Ativar">
+							<p:commandButton id="selectButton" update=":formBuscar:enquete"
+								actionListener="#{perguntas.ativarEnquete}"
+								oncomplete="questionarioDialog.show()" icon="ui-icon-search"
+								title="View">
+								<f:setPropertyActionListener value="#{perg}"
+									target="#{perguntas.cadastrarPergunta}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</center>
+
+				<p:dialog id="enquete"
+					header=" SIPA - Sistema Interativo de Proficiência Academica"
+					widgetVar="questionarioDialog" resizable="false" width="500"
+					height="500" showEffect="drop" hideEffect="blind">
+
+					<p:graphicImage value="/img/logo_sipa.jpg" width="160" height="180"
+						style="margin-left:100px" />
+
+					<p:spacer width="100" height="50" />
+
+					<center>
+						<h:outputText value="#{perguntas.cadastrarPergunta.value}"
+							style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';" />
+						<br /> <br />
+
+					</center>
+					<h:outputText value="#{perguntas.cadastrarPergunta.resposta1}"
+						style="margin-left:150px;" />
+					<br />
+					<br />
+
+
+					<h:outputText value="#{perguntas.cadastrarPergunta.resposta2}"
+						style="margin-left:150px;" />
+					<br />
+					<br />
+
+
+					<h:outputText value="#{perguntas.cadastrarPergunta.resposta3}"
+						style="margin-left:150px;" />
+					<br />
+					<br />
+
+
+					<h:outputText value="#{perguntas.cadastrarPergunta.resposta4}"
+						style="margin-left:150px" />
+					<br />
+					<br />
+
+					<p:commandButton id="BtnTermino" ajax="true" update="@this"
+						onclick="javascript: if('#{perguntas.btnIniciar}' == 'Terminar') '#{chartBean.livePieModel}' ;"
+						rendered="true" actionListener="#{perguntas.iniciarEnquete}"
+						value="#{perguntas.btnIniciar}" styleClass="ui-priority-primary"
+						style="margin-left:350px;" />
+
+					<br />
+				</p:dialog>
+
+				
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

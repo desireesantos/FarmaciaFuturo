@@ -1,0 +1,266 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>SIPA</title>
+	<meta http-equiv="refresh" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<title>SIPA</title>
+	
+	<style type="text/css">
+html,body {
+	height: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	position: relative !important;
+}
+</style>
+
+
+</h:head>
+<h:body >
+	<h:form id="menuForm" enctype="multipart/form-data">
+		<p:layout fullPage="true">
+
+			<!-- Banner TOPO -->
+			<p:layoutUnit position="north" size="50">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: xx-large; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner TOPO -->
+
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<h:outputLabel value="Conectividade: " style="font-weight:bold" />
+				<h:outputText value="#{trocarTema.nomeConectividade}" />
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Banner CARROSEL -->
+			<p:layoutUnit position="east" size="200">
+				<p:carousel rows="1" itemStyle="height:400px;width:180px;"
+					autoPlayInterval="4000" effect="elasticIn" circular="true">
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_enquete.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+ 				</p:carousel>
+			</p:layoutUnit>
+			<!-- Fim Banner CARROSEL -->
+
+
+
+			<!-- Menu -->
+			<p:layoutUnit position="center">
+
+				<p:menubar>
+					<p:menuitem value="Home"
+						url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+						icon="ui-icon-home" />
+					<!-- 	     Início Menu Conectividade  -->
+					<p:submenu label="Conectividade" icon="ui-icon-gear">
+
+						<p:menuitem value="Controle Remoto" style="font-size:16"
+							ajax="false">
+
+							<f:setPropertyActionListener value="humanity"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Controle Remoto"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Bluetooth" ajax="false">
+							<f:setPropertyActionListener value="start"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Bluetooth"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Web" ajax="false">
+							<f:setPropertyActionListener value="sunny"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Web"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+					</p:submenu>
+					<!-- 	     Fim Menu Conectividade     -->
+
+
+
+					<!-- Menu Questionário   -->
+					<p:submenu label="Questionario" icon="ui-icon-pencil" >
+
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false"   />
+
+						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
+
+						<!-- Fim Menu Questionario -->
+
+					</p:submenu>
+
+
+					<!-- Fim Menu Questionário   -->
+
+
+					<!-- Menu Relatório  -->
+					<p:submenu label="Relatório" icon="ui-icon-document">
+
+						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
+							ajax="false" />
+
+					</p:submenu>
+
+
+					<!-- Menu Ajuda  -->
+					<p:submenu label="Ajuda" icon="ui-icon-info">
+
+						<p:menuitem value="Manual do usuario" url="manualUsuario.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Crédito" url="credito.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Versão" url="versao.xhtml" style="font-size:16"
+							ajax="false" />
+
+
+					</p:submenu>
+					<!-- Fim Menu  -->
+
+				</p:menubar>
+
+
+
+
+
+				<!-- Conteúdo Cadastrar -->
+				<center>
+					<DIV id="logo" style="display: inline;">
+						<p:commandLink id="sair"
+							actionListener="#{administradorMB.logout}">
+							<h:outputText value="Sair"
+								style="margin-left:980px;FONT-FAMILY:'Al Bayan'; FONT-SIZE:large; COLOR: #2e36ed;" />
+						</p:commandLink>
+
+						<h3>Cadastrar Perguntas</h3>
+
+					</DIV>
+
+					<!-- Inicio Pergunta -->
+					<p:growl id="messages" life="3000" showDetail="true" />
+					
+					
+	
+					<h:panelGrid id="gridPergunta" columns="1" style="margin-top:10px"
+							ajax="false" >
+	
+					
+					
+
+						<h:outputLabel for="value" value="Pergunta: " />
+						<p:inputTextarea  id="inputpergunta" rows="4" cols="50"
+							required="true" label="Pergunta"
+							value="#{perguntas.cadastrarPergunta.value}">
+						</p:inputTextarea>
+
+
+						<br />
+						<h:outputLabel value="Resposta: " />
+
+
+						<p:inputText id="anwser1"
+							value="#{perguntas.cadastrarPergunta.resposta1}" required="true"
+							label="Resposta 1" size="50">
+							<f:validateLength minimum="1" />
+						</p:inputText>
+						<p:watermark for="anwser1" value="Digite resposta 1" />
+
+						<p:inputText id="anwser2"
+							value="#{perguntas.cadastrarPergunta.resposta2}" required="true"
+							label="Resposta 2" size="50">
+							<f:validateLength minimum="1" />
+						</p:inputText>
+						<p:watermark for="anwser2" value="Digite resposta 2" />
+
+						<p:inputText id="anwser3"
+							value="#{perguntas.cadastrarPergunta.resposta3}" required="true"
+							label="Resposta 	3" size="50">
+							<f:validateLength minimum="1" />
+						</p:inputText>
+						<p:watermark for="anwser3" value="Digite resposta 3" />
+
+						<p:inputText id="anwser4"
+							value="#{perguntas.cadastrarPergunta.resposta4}" required="true"
+							label="Resposta 4" size="50">
+							<f:validateLength minimum="1" />
+						</p:inputText>
+						<p:watermark for="anwser4" value="Digite resposta 4" />
+
+						<br />
+
+						<h:outputText value="Resposta Correta: " />
+						<p:keyboard id="RespostaCerta" alt="Resposta Certa"
+							value="#{perguntas.cadastrarPergunta.respostaCorreta}"
+							required="true" maxlength="1" layout="custom"
+							layoutTemplate="12-clear,34-close" size="5" effect="fadeIn"
+							closeLabel="fecha" clearLabel="limpa"
+							onmouseup="trocartexto(this)">
+							<f:validator validatorId="KeyValidator" />
+						</p:keyboard>
+						<br />
+
+
+					 	<h:outputText value="Arquivo: " />
+
+
+						<p:fileUpload fileUploadListener="#{perguntas.handleFileUpload}"
+							mode="advanced" update="messages" sizeLimit="100000" auto="true"
+							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+					
+						<br />
+						<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
+							icon="ui-icon-circle-check" action="#{perguntas.salvar}" />
+
+					</h:panelGrid>
+
+
+
+				</center>
+
+				<!-- Fim Conteúdo Cadastrar -->
+
+
+
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>
