@@ -10,12 +10,14 @@ import javax.el.ExpressionFactory;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,8 +35,8 @@ public class QuizRealizada {
 	private int id_quiz;
 	
 	@ManagedProperty(value="br.com.bean.CadastrarPergunta" ,name="cadastrarPergunta" )
-	@OneToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="pergunta_id", referencedColumnName="id")	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="pergunta_id", referencedColumnName="id", updatable=true,insertable=true)	
 	private CadastrarPergunta cadastrarPergunta;
 	
 	private String tipoConectividade;
@@ -114,7 +116,7 @@ public class QuizRealizada {
 	}
 
 	public Date getInicioDataHora() {
-		obterDataHora();	
+		//obterDataHora();	
 		return inicioDataHora;
 	}
 

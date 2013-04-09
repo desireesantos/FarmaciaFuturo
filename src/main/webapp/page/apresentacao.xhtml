@@ -51,7 +51,7 @@ html,body {
 
 			<!-- Banner CARROSEL -->
 			<p:layoutUnit position="east" size="200">
-				<p:carousel rows="1" itemStyle="height:420px;width:160px;"
+				<p:carousel rows="1" itemStyle="height:400px;width:170px;"
 					autoPlayInterval="4000" effect="elasticIn" circular="true">
 					<p:tab>
 						<h:panelGrid columns="2" cellpadding="10">
@@ -94,6 +94,9 @@ html,body {
 							<f:setPropertyActionListener value="humanity"
 								target="#{trocarTema.tema}" />
 
+							<f:setPropertyActionListener value="false"
+								target="#{trocarTema.status}" />
+
 							<f:setPropertyActionListener value="Controle Remoto"
 								target="#{trocarTema.nomeConectividade}" />
 						</p:menuitem>
@@ -102,6 +105,9 @@ html,body {
 							<f:setPropertyActionListener value="start"
 								target="#{trocarTema.tema}" />
 
+							<f:setPropertyActionListener value="false"
+								target="#{trocarTema.status}" />
+
 							<f:setPropertyActionListener value="Bluetooth"
 								target="#{trocarTema.nomeConectividade}" />
 						</p:menuitem>
@@ -109,6 +115,9 @@ html,body {
 						<p:menuitem value="Web" ajax="false">
 							<f:setPropertyActionListener value="sunny"
 								target="#{trocarTema.tema}" />
+								
+								<f:setPropertyActionListener value="true"
+								target="#{trocarTema.status}" />
 
 							<f:setPropertyActionListener value="Web"
 								target="#{trocarTema.nomeConectividade}" />
@@ -131,7 +140,7 @@ html,body {
 					<!-- Menu Relatório  -->
 					<p:submenu label="Relatório" icon="ui-icon-document">
 
-						<p:menuitem value="Gerar Relatório" url="prebusca.xhtml"
+						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
 							style="font-size:16" ajax="false" />
 
 					</p:submenu>
@@ -148,17 +157,15 @@ html,body {
 							ajax="false" />
 					</p:submenu>
 					<!-- Fim Menu Relatório  -->
-
-
 				</p:menubar>
 
 
 
 
 				<!-- Imagem Tela Principal -->
-				<p:commandLink id="sair" actionListener="#{administradorMB.logout}">
+				<p:commandLink id="sair" actionListener="#{administradorMB.logout}" >
 					<h:outputText value="Sair"
-						style="margin-left:980px;FONT-FAMILY: 'Al Bayan'; FONT-SIZE:large; COLOR: #2e36ed;" />
+						style="margin-left:900px;FONT-FAMILY: 'Al Bayan'; FONT-SIZE:large; COLOR: #2e36ed;" />
 				</p:commandLink>
 				<center>
 					<br />

@@ -1,6 +1,11 @@
 package br.com.service;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -9,6 +14,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.bean.CadastrarPergunta;
 import br.com.bean.QuizRealizada;
+import br.com.bean.Usuario;
 import br.com.infraestrutura.QuizRealizadaDAO;
 
 @SessionScoped
@@ -19,6 +25,10 @@ public class QuizRealizadaMB implements Serializable {
 	private QuizRealizada quizRealizada = new QuizRealizada();
 
 	private CadastrarPergunta cadastrarPergunta;
+
+	private List<QuizRealizada> listarQuizRealizadas;
+	
+	private List<Usuario> listarUsuarioRealizadas;
 	
 	private String btnIniciar;
 
@@ -61,7 +71,6 @@ public class QuizRealizadaMB implements Serializable {
 				.createValueExpression(elContext, "#{" + ref + "}",
 						Object.class).getValue(elContext);
 
-		System.out.println("Id pergunta selecionada:" + cadastrar.getId());
 
 		return cadastrar;
 	}
@@ -87,7 +96,7 @@ public class QuizRealizadaMB implements Serializable {
 		if (btnIniciar.equals("Terminar")) {
 			this.btnIniciar = "Valendo";
 		}
-		System.out.println("Enquete:" + btnIniciar);
+		
 
 	}
 
@@ -104,15 +113,49 @@ public class QuizRealizadaMB implements Serializable {
 	public void setCadastrarPergunta(CadastrarPergunta cadastrarPergunta) {
 		this.cadastrarPergunta = cadastrarPergunta;
 	}
+
+
+	public List<QuizRealizada> getListarQuizRealizadas() throws ParseException {
+		List<QuizRealizada> novaLista = new ArrayList<QuizRealizada>();
+		QuizRealizadaDAO dao = new QuizRealizadaDAO();
 	
-//	private void obterNomeAdmin() {
-//		System.out.println("+++++Entrou em ObterNome++++");
-//		AdministradorDAO dao = new AdministradorDAO();
-//		AdminLogado adminlogado = new AdminLogado();
-//		adminlogado = dao.findLogadoByEmail();
-//		System.out.println(adminlogado.getNome());
-//		this.quizRealizada.setNomeAdministrador(adminlogado.getNome());
-//	}
+	
+		Date date;
+		String formatDate = "Dd/mm/yyyy hh:mm:ss";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatDate);
+		
+		for (QuizRealizada quizTemp :dao.listarQuizRealizadas()) {
+			date = quizTemp.getInicioDataHora();
+			
+				quizTemp.setInicioDataHora( simpleDateFormat.parse(simpleDateFormat.format(date))  );
+				novaLista.add(quizTemp);
+		}
+		
+		return listarQuizRealizadas = novaLista;
+	}
+
+
+	public void setListarQuizRealizadas(List<QuizRealizada> listarQuizRealizadas) {
+		this.listarQuizRealizadas = listarQuizRealizadas;
+	}
+	
+ 
+	
+
+
+	public List<Usuario> getListarUsuarioRealizadas() {
+		QuizRealizadaDAO dao = new QuizRealizadaDAO();
+		listarUsuarioRealizadas = dao.listarUsuarioRealizadas(quizRealizada.getId());
+		
+		
+		return listarUsuarioRealizadas;
+	}
+
+
+	public void setListarUsuarioRealizadas(List<Usuario> listarUsuarioRealizadas) {
+		this.listarUsuarioRealizadas = listarUsuarioRealizadas;
+	}
+	
 
 
 }

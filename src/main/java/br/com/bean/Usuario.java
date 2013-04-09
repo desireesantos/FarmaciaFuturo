@@ -1,12 +1,15 @@
 package br.com.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 /*import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 */
+import javax.persistence.Transient;
 
 /**
  * Entity implementation class for Entity: Usuario
@@ -20,6 +23,8 @@ public class Usuario extends Participante implements Serializable {
 
 	private String resposta;
 	private Participante participante = new Participante();
+	
+	
 
 
 	private int quiz;
@@ -53,6 +58,7 @@ public class Usuario extends Participante implements Serializable {
 		this.quiz = quiz;
 	}
 
+	
 	
 
 }

@@ -14,6 +14,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -43,7 +44,7 @@ public class Perguntas implements Serializable {
 
 	private CadastrarPergunta cadastrarPergunta = new CadastrarPergunta();
 	private DataModel listarCadastrarPerguntas;
-	//private DataModel pergunta;
+	// private DataModel pergunta;
 	private FacesContext facesContext;
 	private final static String[] opcoes;
 	private List<CadastrarPergunta> perguntasRelatorio;
@@ -59,12 +60,11 @@ public class Perguntas implements Serializable {
 	}
 
 	public Perguntas() {
+
+		this.btnIniciar = "Iniciar";
 		
-		this.btnIniciar = "Iniciar";	
-		
-		
+
 		Perguntas.this.setCadastrarPergunta(new CadastrarPergunta());
-	
 
 	}
 
@@ -75,8 +75,6 @@ public class Perguntas implements Serializable {
 	public void setFacesContext(FacesContext facesContext) {
 		this.facesContext = facesContext;
 	}
-
-
 
 	public String[] getOpcoes() {
 		return opcoes;
@@ -90,7 +88,6 @@ public class Perguntas implements Serializable {
 		this.cadastrarPergunta = cadastrarPergunta;
 	}
 
-	
 	public DataModel getListarCadastrarPerguntas() {
 
 		PerguntaDAO dao = new PerguntaDAO();
@@ -108,13 +105,12 @@ public class Perguntas implements Serializable {
 
 	/**
 	 * Grava no banco de dados pergunta
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void salvar() throws IOException {
 		Boolean estado = false;
 		System.out.println("Entrou para salvar");
-		System.out.println(".:::NOME IMAGEM:" + cadastrarPergunta.getImagem()
-				+ "::..");
 
 		PerguntaDAO dao = new PerguntaDAO();
 		estado = dao.salvar(cadastrarPergunta);
@@ -126,8 +122,7 @@ public class Perguntas implements Serializable {
 		} else {
 			enviarMensagem("Erro ao cadastrar");
 		}
-		
-		
+
 	}
 
 	/**
@@ -158,22 +153,23 @@ public class Perguntas implements Serializable {
 		CadastrarPergunta atualizaPergunta = (CadastrarPergunta) (listarCadastrarPerguntas
 				.getRowData());
 		dao.update(atualizaPergunta);
-
 	}
 
 	/**
 	 * Deleta do banco a pergunta que está no objeto cadastrarPergunta, que foi
 	 * setado na view.
 	 */
-	public void excluir() {
+	public void  excluir() {
 
+		System.out.println("ENTROU NO EXCLUIR");
 		PerguntaDAO dao = new PerguntaDAO();
 
-		CadastrarPergunta deletaPergunta = (CadastrarPergunta) (listarCadastrarPerguntas
-				.getRowData());
-		List<CadastrarPergunta> temp = dao.excluir(deletaPergunta);
-		listarCadastrarPerguntas = new ListDataModel(temp);
-		System.out.println("Objeto EXCLUIDO");
+		//CadastrarPergunta deletaPergunta = (CadastrarPergunta) (listarCadastrarPerguntas.getRowData());
+		//new ListDataModel(temp);
+		System.out.println(cadastrarPergunta.getId());
+		//List<CadastrarPergunta> temp = dao.excluir(cadastrarPergunta);
+		perguntasRelatorio = dao.excluir(cadastrarPergunta);
+				
 
 		if (listarCadastrarPerguntas != null) {
 			enviarMensagem("Removida com sucesso ");
@@ -194,7 +190,7 @@ public class Perguntas implements Serializable {
 
 		PerguntaDAO dao = new PerguntaDAO();
 		dao.update(temp);
-
+		enviarMensagem("Atualizado com sucesso");
 	}
 
 	/**
@@ -227,29 +223,33 @@ public class Perguntas implements Serializable {
 
 	}
 
-	/*
-	 * public void arquivoUpload(FileUploadEvent event) { final String path =
-	 * "/Users/desireesantos/Desktop/PROJETOFINAL/CliqueON/WebContent/WEB-INF/imgUpload"
-	 * ; try { System.out.println("ENTROU AQUI !"); ExternalContext
-	 * externalContext = FacesContext.getCurrentInstance()
-	 * .getExternalContext();
-	 * 
-	 * FacesContext aFacesContext = FacesContext.getCurrentInstance();
-	 * ServletContext context = (ServletContext) aFacesContext
-	 * .getExternalContext().getContext();
-	 * 
-	 * File file = new File(path); file.mkdirs();
-	 * 
-	 * byte[] conteudo = event.getFile().getContents();
-	 * 
-	 * String caminho = path + event.getFile().getFileName(); FileOutputStream
-	 * fos = new FileOutputStream(caminho); fos.write(conteudo); fos.close();
-	 * 
-	 * this.cadastrarPergunta.setImagem(event.getFile().getFileName());
-	 * System.out.println("Imagem" + cadastrarPergunta.getImagem());
-	 * 
-	 * } catch (Exception ex) { System.out.println("Erro ao Upload Imagem"); } }
-	 */
+	public void arquivoUpload(FileUploadEvent event) {
+		final String path = "/Users/desireesantos/Desktop/PROJETOFINAL/CliqueON/WebContent/WEB-INF/imgUpload";
+		try {
+			System.out.println("ENTROU AQUI !");
+			ExternalContext externalContext = FacesContext.getCurrentInstance()
+					.getExternalContext();
+
+			FacesContext faFacesContext = FacesContext.getCurrentInstance();
+			ServletContext context = (ServletContext) facesContext.getExternalContext().getContext();
+
+			File file = new File(path);
+			file.mkdirs();
+
+			byte[] conteudo = event.getFile().getContents();
+
+			String caminho = path + event.getFile().getFileName();
+			FileOutputStream fos = new FileOutputStream(caminho);
+			fos.write(conteudo);
+			fos.close();
+
+			this.cadastrarPergunta.setImagem(event.getFile().getFileName());
+			System.out.println("Imagem" + cadastrarPergunta.getImagem());
+
+		} catch (Exception ex) {
+			System.out.println("Erro ao Upload Imagem");
+		}
+	}
 
 	/**
 	 * Grava no banco de dados pergunta
@@ -335,26 +335,27 @@ public class Perguntas implements Serializable {
 
 	}
 
-	public void handleFileUpload(FileUploadEvent event) throws IOException {
-
-		byte[] foto = event.getFile().getContents();
-		String destination = "//Users//desireesantos//Desktop//PROJETOFINAL//arquivos";
-
-		File file = new File(destination);
-
-		String filePath = file + "/" + event.getFile().getFileName();
-		System.out.println("Foto:" + foto.toString());
-		System.out.println("filePath:" + filePath);
-
-		criaArquivo(foto, filePath);
-
-		// Obter nome da imagem para gravar no banco
-		cadastrarPergunta.setImagem(event.getFile().getFileName());
-		FacesMessage msg = new FacesMessage("Imagem Enviada:", event.getFile()
-				.getFileName());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-
-	}
+	
+	  public void handleFileUpload(FileUploadEvent event) throws IOException {
+	  
+	  byte[] foto = event.getFile().getContents(); String destination =
+	  "//Users//desireesantos//Desktop//PROJETOFINAL//arquivos";
+	  
+	  File file = new File(destination);
+	  
+	  String filePath = file + "/" + event.getFile().getFileName();
+	  System.out.println("Foto:" + foto.toString());
+	  System.out.println("filePath:" + filePath);
+	  
+	  criaArquivo(foto, filePath);
+	  
+	  // Obter nome da imagem para gravar no banco
+	  cadastrarPergunta.setImagem(event.getFile().getFileName()); FacesMessage
+	  msg = new FacesMessage("Imagem Enviada:", event.getFile()
+	  .getFileName()); FacesContext.getCurrentInstance().addMessage(null, msg);
+	  
+	  }
+	 
 
 	private void criaArquivo(byte[] foto, String file) throws IOException {
 		FileOutputStream outputStream = new FileOutputStream(file);
@@ -363,11 +364,13 @@ public class Perguntas implements Serializable {
 
 	}
 
-	public String imagemCaminhoAbsoluto() {
-
-		String destino = "//Users//desireesantos//Desktop//PROJETOFINAL//arquivos";
-		return destino + cadastrarPergunta.getImagem();
-	}
+	
+	  public String imagemCaminhoAbsoluto() {
+	  
+	  String destino =
+	  "//Users//desireesantos//Desktop//PROJETOFINAL//arquivos"; return destino
+	  + cadastrarPergunta.getImagem(); }
+	 
 
 	public void prepararExibirPergunta() {
 		cadastrarPergunta = (CadastrarPergunta) listarCadastrarPerguntas
@@ -384,59 +387,46 @@ public class Perguntas implements Serializable {
 	}
 
 	public void iniciarEnquete() throws IOException {
-		
+
 		if (this.btnIniciar == "Terminar") {
 
 			FacesContext.getCurrentInstance().getExternalContext()
-			.redirect("/ClickerBrOn/page/grafico.xhtml");
-		
+					.redirect("/ClickerBrOn/page/grafico.xhtml");
+
 		}
-		
+
 		this.btnIniciar = "Terminar";
-		
+
 		salvarEnquete();
-		
 
 	}
 
-
 	private void salvarEnquete() {
-		
+
 		QuizRealizada quizRealizada = new QuizRealizada();
 		quizRealizada.setCadastrarPergunta(cadastrarPergunta);
-		
+
 		Boolean estado = false;
 		System.out.println("Entrou no salvar enquete");
 
 		QuizRealizadaDAO dao = new QuizRealizadaDAO();
-		
+
 		AdministradorDAO adminDao = new AdministradorDAO();
 		quizRealizada.setNomeAdministrador(adminDao.findLogadoByEmail());
-		
-		
+
 		estado = dao.salvar(quizRealizada);
 		if (estado) {
 			System.out.println("Enquete gravada com sucesso");
 		} else {
 			System.out.println("Erro ao gravar a enquete");
-		}		
-		
+		}
+
 	}
-	
-/*	public void dataHoraFim() {
-		System.out.println("-----Entrou no gravar DataHora");
-		QuizRealizada quizRealizada = new QuizRealizada();
-		quizRealizada.setCadastrarPergunta(cadastrarPergunta);
-		Date dataHoraFimEnquete = quizRealizada.getFimDataHora();
-		
-		QuizRealizadaDAO dao = new QuizRealizadaDAO();
-		dao.gravarHora(dataHoraFimEnquete);
-		
-	}*/
-	
+
+
 
 	public String getBtnIniciar() {
-		
+
 		return btnIniciar;
 	}
 
@@ -446,10 +436,5 @@ public class Perguntas implements Serializable {
 
 
 	
-
-
-
-
-
 
 }

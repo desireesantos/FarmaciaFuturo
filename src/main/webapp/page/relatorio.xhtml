@@ -157,10 +157,23 @@ html,body {
 
 
 
-					<p:dataTable id="questionario" var="perg"
-						value="#{perguntas.perguntasRelatorio}" paginator="true" rows="5"
-						emptyMessage="Nenhuma pergunta cadastrada.">
+					<p:dataTable id="questionario" var="quiz"
+						value="#{quizRealizadaMB.listarQuizRealizadas}" paginator="true"
+						rows="5" emptyMessage="Nenhuma pergunta cadastrada.">
 
+
+
+						<p:column style="width:auto">
+
+							<f:facet name="header">
+								<h:outputText value="Data" />
+							</f:facet>
+							
+								<h:outputText value="#{quiz.inicioDataHora}" >
+									  <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/> 
+								</h:outputText>
+	
+						</p:column>
 
 
 						<p:column style="width:auto">
@@ -168,88 +181,119 @@ html,body {
 							<f:facet name="header">
 								<h:outputText value="Pergunta" />
 							</f:facet>
-							<h:outputText value="#{perg.value}" />
-
-
-						</p:column>
-
-
-						<p:column style="width:auto">
-
-							<f:facet name="header">
-								<h:outputText value="1" />
-							</f:facet>
-							<h:outputText value="#{perg.resposta1}" />
-
+							<h:outputText value="#{quiz.cadastrarPergunta.value}" />
 
 						</p:column>
 
-						<p:column style="width:auto">
-							<f:facet name="header">
-								<h:outputText value="2" />
-							</f:facet>
-
-							<h:outputText value="#{perg.resposta2}" />
-
-
+						<p:column id="ativar" style="width:4%" headerText="Ativar">
+							<p:commandButton id="selectButton" update=":formBuscar:enquete"
+								oncomplete="questionarioDialog.show()" icon="ui-icon-search"
+								title="View">
+								<f:setPropertyActionListener value="#{quiz}"
+									target="#{quizRealizadaMB.quizRealizada}" />
+							</p:commandButton>
 						</p:column>
 
-						<p:column style="width:auto">
-
-							<f:facet name="header">
-								<h:outputText value="3" />
-							</f:facet>
-							<h:outputText value="#{perg.resposta3}" />
-
-						</p:column>
-
-						<p:column style="width:auto">
-							<f:facet name="header">
-								<h:outputText value="4" />
-							</f:facet>
-
-							<h:outputText value="#{perg.resposta4}" />
-						</p:column>
-
-
-
-						<p:column style="width:auto">
-							<f:facet name="header">
-								<h:outputText value="Correta" />
-							</f:facet>
-							<h:outputText value="#{perg.respostaCorreta}" />
-						</p:column>
 					</p:dataTable>
+
+					<p:dialog id="enquete"
+						header=" Relatório"
+						widgetVar="questionarioDialog" resizable="false" width="500"
+						height="600" showEffect="drop" hideEffect="blind">
+
+						<center>
+							<h:outputText value="Data: " />
+							<h:outputText
+								value="#{quizRealizadaMB.quizRealizada.inicioDataHora}"
+								style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan'; " >
+								
+								 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/> 
+								</h:outputText>
+							<br /> <br />
+
+						</center>
+						<h:outputText value="Conectividade: " />
+						<h:outputText
+							value="#{quizRealizadaMB.quizRealizada.tipoConectividade}"
+							style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';" />
+						<br />
+						<br />
+
+						<center>
+							<h:outputText value="Pergunta: " />
+							<h:outputText
+								value="#{quizRealizadaMB.quizRealizada.cadastrarPergunta.value}"
+								style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';" />
+							<br />
+							<br />
+						</center>
+
+						<center>
+							<p:dataTable id="listaAlunos" var="user"
+								value="#{quizRealizadaMB.listarUsuarioRealizadas}"
+								paginator="true" rows="5"
+								emptyMessage="Nenhuma pergunta cadastrada.">
+
+								<p:column style="width:auto">
+
+									<f:facet name="header">
+										<h:outputText value="Aluno(s)" />
+									</f:facet>
+									<h:outputText value="#{user.nome}" />
+
+
+								</p:column>
+								<p:column style="width:auto">
+
+									<f:facet name="header">
+										<h:outputText value="Resposta" />
+									</f:facet>
+									<h:outputText value="#{user.resposta}" />
+
+
+								</p:column>
+
+
+							</p:dataTable>
+						</center>
+
+
+						<!-- Início Button para gerar PDF -->
+
+
+						<h:panelGrid columns="2">
+							<p:panel header="Exportar Relatório" menuTitle="Relatório">
+
+								<h:commandLink>
+									<p:graphicImage value="/img/pdf.png" />
+									<p:dataExporter type="pdf" encoding="UTF-8"
+										target="questionario" fileName="sipa"
+										preProcessor="#{perguntas.preProcessPDF}" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<p:graphicImage value="/img/csv.png" />
+									<p:dataExporter type="csv" target="questionario"
+										fileName="sipa" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<p:graphicImage value="/img/xml.png" />
+									<p:dataExporter type="xml" target="questionario"
+										fileName="sipa" />
+								</h:commandLink>
+							</p:panel>
+
+
+						</h:panelGrid>
+
+						<!-- Fim Button para gerar PDF -->
+
+
+						<br />
+					</p:dialog>
 					<br />
 
-					<!-- Início Button para gerar PDF -->
-
-
-					<h:panelGrid columns="2">
-						<p:panel header="Exportar Relatório" menuTitle="Teste">
-
-							<h:commandLink>
-								<p:graphicImage value="/img/pdf.png" />
-								<p:dataExporter type="pdf" encoding="UTF-8"
-									target="questionario" fileName="sipa"
-									preProcessor="#{perguntas.preProcessPDF}" />
-							</h:commandLink>
-
-							<h:commandLink>
-								<p:graphicImage value="/img/csv.png" />
-								<p:dataExporter type="csv" target="questionario" fileName="sipa" />
-							</h:commandLink>
-
-							<h:commandLink>
-								<p:graphicImage value="/img/xml.png" />
-								<p:dataExporter type="xml" target="questionario" fileName="sipa" />
-							</h:commandLink>
-						</p:panel>
-
-
-					</h:panelGrid>
-
-					<!-- Fim Button para gerar PDF -->
 
 				</center>
 			</p:layoutUnit>

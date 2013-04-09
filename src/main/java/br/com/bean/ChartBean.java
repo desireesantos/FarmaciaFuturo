@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
+import br.com.infraestrutura.ComunicacaoSerialDAO;
 import br.com.infraestrutura.QuizRealizadaDAO;
 import br.com.infraestrutura.UsuarioDAO;
 
@@ -50,31 +51,30 @@ public class ChartBean implements Serializable {
 		
 		
 		
-		  QuizRealizadaDAO dao= new QuizRealizadaDAO(); 
-		  Integer id_pergunta = dao.findIDPerguntaAtual(); 
-		  String respostaCerta = dao.findRespostaCorretaQuizAtual(id_pergunta);
-		  
-		  System.out.println("VALORES CHART_id_Pergunta:"+ id_pergunta);
-		  System.out.println("VALORES Resposta_certa:"+ respostaCerta);
+	  QuizRealizadaDAO dao= new QuizRealizadaDAO(); 
+	  Integer id_pergunta = dao.findIDPerguntaAtual(); 
+	  UsuarioDAO userDao = new UsuarioDAO();
+	  Integer id_quiz = dao.findIDQuizAtual();
+	  String respostaCerta = dao.findRespostaCorretaQuizAtual(id_pergunta);
+	  
+	  System.out.println("VALORES CHART_id_Pergunta:"+ id_pergunta);
+	  System.out.println("VALORES Resposta_certa:"+ respostaCerta);
 
-		UsuarioDAO userDao = new UsuarioDAO();
-		Integer id_quiz = dao.findIDQuizAtual();
-		int pontos[] =  userDao.listarParticipantesQuiz(id_quiz, respostaCerta);
+	  if (dao.findConectividadeAtual().equalsIgnoreCase("Controle Remoto")) {
+			System.out.println("++++++ Conectividade do quiz: Controle Remoto ++++++");
+			
+			ComunicacaoSerialDAO serialDao = new ComunicacaoSerialDAO();
+			serialDao.usuariosOrigemCR(id_quiz);
+			
+		}
+	  
+	  
+		int pontos[] =  userDao.listarParticipantesQuiz(dao.findIDQuizAtual(), respostaCerta);
 		  
 		  quantidadeAcerto = pontos[0]; 
 		  quantidadeErro = pontos[1]; 
 		 
-
+		}
+		 
 	}
 
-
-
-	
-
-
-
-	
-
-	
-
-}

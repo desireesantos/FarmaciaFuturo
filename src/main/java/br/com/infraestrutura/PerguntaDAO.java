@@ -2,17 +2,13 @@ package br.com.infraestrutura;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 
 import br.com.bean.CadastrarPergunta;
-import br.com.bean.QuizRealizada;
-import br.com.bean.Usuario;
 import br.com.util.HibernateUtil;
 
 public class PerguntaDAO implements InterfacePerguntaDAO {
@@ -29,7 +25,6 @@ public class PerguntaDAO implements InterfacePerguntaDAO {
 				.buildSessionFactory();
 		Session session = factory.openSession();
 
-		System.out.println("Nome da Imagem:" + pergunta.getImagem());
 		System.out.println("Session Factory" + session.getSessionFactory());
 
 		Transaction tx = session.beginTransaction();
@@ -83,11 +78,21 @@ public class PerguntaDAO implements InterfacePerguntaDAO {
 	 */
 	public List<CadastrarPergunta> excluir(CadastrarPergunta x) {
 
+		System.out.println(x.getId());
 		System.out.println("SERA REMOVIDO  ... AGUARDE");
+		Session sessionTemp = HibernateUtil.getSessionFactory().openSession();
+		Transaction txTemp = sessionTemp.beginTransaction();
+		sessionTemp.createSQLQuery("delete from quizrealizada where pergunta_id="+ x.getId());
+		System.out.println("Apagou quiz");
+		txTemp.commit();
+		
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		session.delete(x);
+		System.out.println("Apagou pergunta");
 		t.commit();
+	    
 		return listarPerguntas();
 
 	}

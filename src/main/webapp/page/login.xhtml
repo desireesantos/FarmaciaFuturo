@@ -51,7 +51,7 @@
 					style="FONT-SIZE: large; COLOR: #2c2c2c; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
 				<br />
 				<h:outputText
-					value="Não é necessário se cadastrar para votar.Participe"
+					value="Não é necessário se cadastrar para votar."
 					style="FONT-SIZE: large; COLOR: #2c2c2c; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
 				<br />
 				<h:outputText value=""
@@ -61,7 +61,7 @@
 				<br />
 
 				<p:button outcome="votar" value="Clique aqui para votar"
-					alt="Botao Votar" rendered="true" style="margin-left:250px;" />
+					alt="Botao Votar" rendered="#{trocarTema.status}" style="margin-left:250px;" />
 			</p:layoutUnit>
 
 			<!--  Lado Direito -->

@@ -161,18 +161,17 @@ html,body {
 				<center>
 					<h3>Buscar Questionário</h3>
 
-					<p:growl id="avisos" showDetail="true" life="2000"
+					<p:growl id="avisos" showDetail="false" life="2000"
 						style="font-size:16" />
-					<p:dataTable id="questionario" var="perg" 
-						value="#{perguntas.listarCadastrarPerguntas}"
-						selection="#{perguntas.cadastrarPergunta}" selectionMode="single"
-						style="width:94%" paginator="true" rows="10" rowKey="#{perg.id}"
+					<p:dataTable id="questionario" var="perg"
+						value="#{perguntas.perguntasRelatorio}" editable="true"
+						editMode="cell" selection="#{perguntas.cadastrarPergunta}"
+						selectionMode="single" style="width:94%" paginator="true"
+						rows="10" rowKey="#{perg.id}"
 						emptyMessage="Nenhuma pergunta cadastrada.">
 
-						<p:ajax event="rowEdit" update=":formBuscar:questionario"
+						<p:ajax event="rowEdit" update=":formBuscar:avisos"
 							listener="#{perguntas.onEditRow}" />
-							
-						<p:poll interval="2" listener="#{perguntas.listarCadastrarPerguntas}" update="@all" autoStart="false" />	
 
 						<p:column headerText="Pergunta" style="width:auto" id="pergunta">
 							<p:cellEditor id="pergunta_editor">
@@ -228,29 +227,49 @@ html,body {
 							</p:cellEditor>
 						</p:column>
 
-						<p:column style="width:16px">
-							<p:rowToggler />
+						
+						<p:column headerText="-" >
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{perg.respostaCorreta}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:selectOneMenu value="#{perg.respostaCorreta}">
+										<f:selectItems value="#{perguntas.opcoes}" var="man"
+											itemLabel="#{man}" itemValue="#{man}" />
+									</h:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+
+
+
+						<p:column id="editInfo" headerText="Editar" style="width:auto;">
+
+							<p:rowEditor/>
+
 						</p:column>
 
-						<p:rowExpansion>
-							<h:panelGrid id="display" columns="2" cellpadding="4"
-								style="width:300px;" styleClass="ui-state-highlight"
-								columnClasses="label, value" update=":formBuscar:questionario">
+						<p:column id="editarColuna" headerText="Apagar" style="width:auto;" >
+	
+							<p:commandButton type="button" onclick="cd.show()"
+								icon="ui-icon ui-icon-trash" />
+							<p:confirmDialog message="Deseja apagar pergunta ?"
+								header="Apagar" severity="alert" widgetVar="cd"
+								appendToBody="true" closable="true" >
+								<center>
+									<p:commandButton value="Sim" ajax="true" 
+										action="#{perguntas.excluir}" 
+										oncomplete="cd.hide()" update=":formBuscar:avisos" >
+										<f:ajax execute="questionario" render="questionario" />  
+										
+										</p:commandButton>
+									<p:commandButton value="Não" onclick="cd.hide();" type="button" />
+								</center>
+							</p:confirmDialog>
 
-								<h:selectOneMenu value="#{perg.respostaCorreta}">
-									<f:selectItems value="#{perguntas.opcoes}" var="man"
-										itemLabel="#{man}" itemValue="#{man}" />
-								</h:selectOneMenu>
 
-							</h:panelGrid>
-
-						</p:rowExpansion>
-
-						<p:column id="editarColuna" headerText="Editar"
-							value="#{perguntas.onRenderCorreta}" style="width:auto">
-							<p:rowEditor value="{perguntas.valorbooleano}" />
-							<h:commandLink actionListener="#{perguntas.excluir}"
-								styleClass="ui-icon ui-icon-trash" update="avisos" />
 						</p:column>
 
 
@@ -262,51 +281,58 @@ html,body {
 								<f:setPropertyActionListener value="#{perg}"
 									target="#{perguntas.cadastrarPergunta}" />
 							</p:commandButton>
+
+
+
+
 						</p:column>
 					</p:dataTable>
 				</center>
 
 				<p:dialog id="enquete"
 					header=" SIPA - Sistema Interativo de Proficiência Academica"
-					widgetVar="questionarioDialog" resizable="false" width="500"
+					widgetVar="questionarioDialog" resizable="false" width="900"
 					height="500" showEffect="drop" hideEffect="blind">
 
-					<p:graphicImage value="/img/logo_sipa.jpg" width="160" height="180"
-						style="margin-left:100px" />
-
-					<p:spacer width="100" height="50" />
-
 					<center>
-						<h:outputText value="#{perguntas.cadastrarPergunta.value}"
-							style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';" />
-						<br /> <br />
-
+						<p:graphicImage value="/img/logo_sipa.jpg" width="160"
+							height="180" />
 					</center>
+					<p:spacer width="50" height="20" />
+
+
+					<h:outputText value="#{perguntas.cadastrarPergunta.value}"
+						style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
+					<br />
+					<br />
+
+
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta1}"
-						style="margin-left:150px;" />
+						style="margin-left:100px;" />
 					<br />
 					<br />
 
 
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta2}"
-						style="margin-left:150px;" />
+						style="margin-left:100px;" />
 					<br />
 					<br />
 
 
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta3}"
-						style="margin-left:150px;" />
+						style="margin-left:100px;" />
 					<br />
 					<br />
 
 
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta4}"
-						style="margin-left:150px" />
+						style="margin-left:100px" />
 					<br />
 					<br />
 
+
 					<p:commandButton id="BtnTermino" ajax="true" update="@this"
-						onclick="javascript: if('#{perguntas.btnIniciar}' == 'Terminar') '#{chartBean.livePieModel}' ;"
+						onclick="javascript: if('#{perguntas.btnIniciar}' == 'Terminar') '#{chartBean.livePieModel}';"
 						rendered="true" actionListener="#{perguntas.iniciarEnquete}"
 						value="#{perguntas.btnIniciar}" styleClass="ui-priority-primary"
 						style="margin-left:350px;" />
@@ -314,7 +340,7 @@ html,body {
 					<br />
 				</p:dialog>
 
-				
+
 			</p:layoutUnit>
 		</p:layout>
 	</h:form>

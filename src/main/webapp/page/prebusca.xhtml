@@ -50,7 +50,7 @@
 				<!-- Menu Relatório  -->
 					<p:submenu label="Relatório" icon="ui-icon-document">
 
-						<p:menuitem value="Gerar Relatório" url="prebusca.xhtml" style="font-size:16" ajax="false" />
+						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml" style="font-size:16" ajax="false" />
 						
 					</p:submenu>			
 		</p:menubar>
@@ -61,18 +61,18 @@
 		<center>
 			<h1>Buscar Questionário</h1>
 
-			<!-- Início  PreBusca -->
+			<!-- Início  relatorio -->
 			
 
 					<h:panelGrid id="gridPergunta" columns="3" style="margin-top:10px">
 						
-						 <p:autoComplete id="textoSelecionado" value="#{cadastrarPergunta.autoComplete}" completeMethod="#{perguntas.prebusca}" multiple="true" size="50"/>  
+						 <p:autoComplete id="textoSelecionado" value="#{cadastrarPergunta.autoComplete}" completeMethod="#{perguntas.relatorio}" multiple="true" size="50"/>  
 					
 					</h:panelGrid>
 					
 					<p:button outcome="relatorio" value="Buscar" icon="ui-icon-circle-check" />  
    								
-			<!--    Fim PreBusca -->
+			<!--    Fim relatorio -->
 			
 
 			<br /> 

@@ -22,10 +22,11 @@ public class Administrador extends Participante implements Serializable{
 	private String email;
 	private String senha;
 	private Participante participante;
-	
+		
 
 	public Administrador() 
 	{
+		
 		
 	}
 

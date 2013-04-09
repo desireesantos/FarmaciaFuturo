@@ -175,7 +175,7 @@ html,body {
 					</DIV>
 
 					<!-- Inicio Pergunta -->
-					<p:growl id="messages" life="3000" showDetail="true" />
+					<p:growl id="messages" life="3000" showDetail="false" />
 					
 					
 	
@@ -238,20 +238,14 @@ html,body {
 						<br />
 
 
-					 	<h:outputText value="Arquivo: " />
-
-
-						<p:fileUpload fileUploadListener="#{perguntas.handleFileUpload}"
-							mode="advanced" update="messages" sizeLimit="100000" auto="true"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 					
-						<br />
+					
 						<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
 							icon="ui-icon-circle-check" action="#{perguntas.salvar}" />
 
 					</h:panelGrid>
 
-
+ 			
 
 				</center>
 
