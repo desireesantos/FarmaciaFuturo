@@ -130,7 +130,6 @@ public class UsuarioDAO implements InterfaceUsuario {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<Usuario> lista =  session.createSQLQuery("select * from participante").list();
 	    
-		//System.out.println("TAMANHO: "+lista.size());
 		
 		int somarPontoCorreto = 0;
 		int somarPontoErrado = 0;
@@ -143,7 +142,6 @@ public class UsuarioDAO implements InterfaceUsuario {
                String stringIdQuiz =  String.valueOf(id_quiz);
                String stringQuiz =  String.valueOf(quiz);
                 
-              // System.out.println(stringIdQuiz +" - "+ stringQuiz);
                if (stringQuiz.equalsIgnoreCase(stringIdQuiz) && respostaCerta.equalsIgnoreCase(resposta)) {
 				somarPontoCorreto++;
 			} 
@@ -153,10 +151,6 @@ public class UsuarioDAO implements InterfaceUsuario {
             
 		}
 		
-
-      //  System.out.println(somarPontoCorreto);
-      //  System.out.println(somarPontoErrado);
-        
         pontos[0]=somarPontoCorreto;
         pontos[1]=somarPontoErrado;
         return pontos;	

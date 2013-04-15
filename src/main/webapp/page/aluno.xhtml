@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SIPA</title>
+	<style type="text/css">
+html,body {
+	height: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	position: relative !important;
+}
+</style>
+</h:head>
+<h:body>
+	<h:form id="menuForm">
+		<p:layout fullPage="true">
+
+
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<center>
+					<h:outputText
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: small; FONT-FAMILY: 'Futura';" />
+				</center>
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Tela Login -->
+			<p:layoutUnit position="center">
+
+
+				<center>
+					<br />
+
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage value="/img/img_headerSIPA.png" height=" 200"
+							width="1000" />
+
+					</h:panelGrid>
+
+
+					<!-- Inicio Logar -->
+					<p:growl id="messages" life="3000" />
+
+					<h:panelGrid id="gridCadastrarAluno" columns="2"
+						style="margin-top:10px" ajax="false">
+
+						<h:outputText value="Controle Remoto 1: " />
+						<p:inputText id="cr1"
+							value="#{administradorMB.administrador.nome}" size="50"
+							required="true" label="Nome Completo" />
+
+						<h:outputText value="Controle Remoto 2: " />
+						<p:inputText id="cr1"
+							value="" size="50"
+							required="true" label="Nome Completo" />
+
+						<center>
+							<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
+								action="#{administradorMB.salvar}" />
+						</center>
+
+
+					</h:panelGrid>
+
+
+					<br /> <br /> <br /> <br />
+					<h:outputText value="Clique "
+						style="FONT-SIZE: medium;margin-left:220px;" />
+					<h:link value="Voltar" outcome="apresentacao"
+						style="FONT-SIZE: medium;" />
+
+				</center>
+
+
+
+
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

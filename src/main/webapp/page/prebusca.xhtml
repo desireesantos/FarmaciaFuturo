@@ -11,11 +11,14 @@
 	<h:form id="trocaTemaForm">
 
 		<p:menubar>
-<p:menuitem value="Home" url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="Home"
+				url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+				icon="ui-icon-home" />
 			<!-- 	     Início Menu Conectividade -->
 			<p:submenu label="Conectividade" icon="ui-icon-gear">
 
-				<p:menuitem value="Controle Remoto" style="font-size:16" ajax="false">
+				<p:menuitem value="Controle Remoto" style="font-size:16"
+					ajax="false">
 					<f:setPropertyActionListener value="aristo"
 						target="#{trocarTema.tema}" />
 				</p:menuitem>
@@ -38,45 +41,50 @@
 			<!-- 	     Início Menu Questionário - Cadastrar Perguntas  -->
 			<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-				<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+				<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"
+					immediate="true">
+					<f:event type="preRenderView" listener="#{perguntas.limpaTela}" />
+				</p:menuitem>
 
-
-				<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />				
+				<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 
 			</p:submenu>
 			<!-- 	      Fim Menu Questionario -->
-			
-			
-				<!-- Menu Relatório  -->
-					<p:submenu label="Relatório" icon="ui-icon-document">
 
-						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml" style="font-size:16" ajax="false" />
-						
-					</p:submenu>			
+
+			<!-- Menu Relatório  -->
+			<p:submenu label="Relatório" icon="ui-icon-document">
+
+				<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
+					style="font-size:16" ajax="false" />
+
+			</p:submenu>
 		</p:menubar>
-		 	<!-- Fim Menu Relatório  -->
-		
+		<!-- Fim Menu Relatório  -->
+
 
 
 		<center>
 			<h1>Buscar Questionário</h1>
 
 			<!-- Início  relatorio -->
-			
 
-					<h:panelGrid id="gridPergunta" columns="3" style="margin-top:10px">
-						
-						 <p:autoComplete id="textoSelecionado" value="#{cadastrarPergunta.autoComplete}" completeMethod="#{perguntas.relatorio}" multiple="true" size="50"/>  
-					
-					</h:panelGrid>
-					
-					<p:button outcome="relatorio" value="Buscar" icon="ui-icon-circle-check" />  
-   								
+
+			<h:panelGrid id="gridPergunta" columns="3" style="margin-top:10px">
+
+				<p:autoComplete id="textoSelecionado"
+					value="#{cadastrarPergunta.autoComplete}"
+					completeMethod="#{perguntas.relatorio}" multiple="true" size="50" />
+
+			</h:panelGrid>
+
+			<p:button outcome="relatorio" value="Buscar"
+				icon="ui-icon-circle-check" />
+
 			<!--    Fim relatorio -->
-			
 
-			<br /> 
-			<br />
+
+			<br /> <br />
 
 		</center>
 

@@ -8,12 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Cascade;
 
 
 
@@ -25,7 +23,6 @@ public class CadastrarPergunta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@OneToOne(mappedBy="pergunta")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_pergunta")
 	private int id;
 

@@ -59,6 +59,8 @@ public class ChartBean implements Serializable {
 	  
 	  System.out.println("VALORES CHART_id_Pergunta:"+ id_pergunta);
 	  System.out.println("VALORES Resposta_certa:"+ respostaCerta);
+	  System.out.println("VALOR id_quiz:"+ id_quiz);
+	  
 
 	  if (dao.findConectividadeAtual().equalsIgnoreCase("Controle Remoto")) {
 			System.out.println("++++++ Conectividade do quiz: Controle Remoto ++++++");

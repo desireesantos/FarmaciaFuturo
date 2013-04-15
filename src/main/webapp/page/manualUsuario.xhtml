@@ -112,7 +112,9 @@ html,body {
 					<!-- Início Menu Questionário - Cadastrar Perguntas  -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
+							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 					</p:submenu>

@@ -64,16 +64,6 @@ public class Administrador extends Participante implements Serializable{
 	}
 
 	
-	
-	public String login(){
-		
-		if (participante.getNome().equalsIgnoreCase("tester") && senha.equalsIgnoreCase("tester")){
-			return "success";
-		} else {
-			return "failure";
-		}
-		
-	}
 
 
 

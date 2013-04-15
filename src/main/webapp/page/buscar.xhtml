@@ -120,7 +120,9 @@ html,body {
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
+							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 
@@ -164,14 +166,14 @@ html,body {
 					<p:growl id="avisos" showDetail="false" life="2000"
 						style="font-size:16" />
 					<p:dataTable id="questionario" var="perg"
-						value="#{perguntas.perguntasRelatorio}" editable="true"
+						value="#{perguntas.listarCadastrarPerguntas}" editable="true"
 						editMode="cell" selection="#{perguntas.cadastrarPergunta}"
 						selectionMode="single" style="width:94%" paginator="true"
-						rows="10" rowKey="#{perg.id}"
+						rows="10" rowKey="#{perg.id}" 
 						emptyMessage="Nenhuma pergunta cadastrada.">
 
-						<p:ajax event="rowEdit" update=":formBuscar:avisos"
-							listener="#{perguntas.onEditRow}" />
+						<p:ajax event="rowEdit" update=":formBuscar:avisos, @this"
+							listener="#{perguntas.onEditRow}"  />
 
 						<p:column headerText="Pergunta" style="width:auto" id="pergunta">
 							<p:cellEditor id="pergunta_editor">
@@ -179,7 +181,7 @@ html,body {
 									<h:outputText value="#{perg.value}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText value="#{perg.value}" style="width:100%" />
+									<p:inputText value="#{perg.value}" valueChangeListener="#{perguntas.onEditRow(perg)}" style="width:100%"  />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -245,9 +247,10 @@ html,body {
 
 
 
-						<p:column id="editInfo" headerText="Editar" style="width:auto;">
+						<p:column id="editInfo" headerText="Editar">
 
-							<p:rowEditor/>
+							<p:rowEditor />
+							
 
 						</p:column>
 
@@ -259,7 +262,7 @@ html,body {
 								header="Apagar" severity="alert" widgetVar="cd"
 								appendToBody="true" closable="true" >
 								<center>
-									<p:commandButton value="Sim" ajax="true" 
+									<p:commandButton value="Sim" 
 										action="#{perguntas.excluir}" 
 										oncomplete="cd.hide()" update=":formBuscar:avisos" >
 										<f:ajax execute="questionario" render="questionario" />  
@@ -332,7 +335,7 @@ html,body {
 
 
 					<p:commandButton id="BtnTermino" ajax="true" update="@this"
-						onclick="javascript: if('#{perguntas.btnIniciar}' == 'Terminar') '#{chartBean.livePieModel}';"
+						onclick="javascript: if('#{perguntas.btnIniciar}' == 'Terminar') ;"
 						rendered="true" actionListener="#{perguntas.iniciarEnquete}"
 						value="#{perguntas.btnIniciar}" styleClass="ui-priority-primary"
 						style="margin-left:350px;" />

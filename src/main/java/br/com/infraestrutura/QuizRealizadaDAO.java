@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.model.ListDataModel;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +40,9 @@ public class QuizRealizadaDAO implements InterfaceQuizRealizada {
 		Transaction tx = session.beginTransaction();
 		session.save(quizRealizada);
 
+		Integer x = 0;
+		x = findIDPerguntaAtual() - 1;
+		session.createSQLQuery("delete from quizrealizada where id="+ x + ";");
 		tx.commit();
 		return true;
 	}
@@ -52,22 +57,16 @@ public class QuizRealizadaDAO implements InterfaceQuizRealizada {
 
 	}
 
-	public List<Usuario> listarUsuarioRealizadas(int id) {
+	public List<Usuario> listarUsuarioRealizadas() {
 
-		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		
 		Usuario user = new Usuario();	
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		List lista = session.createSQLQuery("select * from participante where quiz ="+id + ";").list();
+		List lista = session.createQuery("from Usuario").list();
 		
-		for(Iterator it= lista.iterator();it.hasNext();){  
-			
-			
-            Object[] row = (Object[]) it.next();
-            user.setNome((String) row[2]);
-            user.setResposta( (String.valueOf(row[4])) ) ;
-            listaUsuario.add(user);
-		}
-		   return listaUsuario;
+		System.out.println("---> "+ lista.isEmpty() );
+		   return lista;
+		   
 	}
 	
 	

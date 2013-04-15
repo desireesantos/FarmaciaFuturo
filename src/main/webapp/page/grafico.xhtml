@@ -14,7 +14,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-store" />
 	<title>SIPA</title>
-	
+
 	<style type="text/css">
 html,body {
 	height: 100% !important;
@@ -24,7 +24,7 @@ html,body {
 	position: relative !important;
 }
 </style>
-	
+
 </h:head>
 <h:body>
 
@@ -120,7 +120,10 @@ html,body {
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false"/>
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml"
+							process="@form" immediate="true">
+							<f:event type="preRenderView" listener="#{perguntas.limpaTela}" />
+						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 
@@ -160,27 +163,24 @@ html,body {
 				<!-- Conteúdo Buscar -->
 				<center>
 
-			
 
-				<!-- DIALOG GRÁFICO  -->
 
-					<br />
-					<br />
-					<br />
-		
-					<h:panelGrid id="graficoResultado" columns="2"  >
-					
-			
-					
-					 <p:pieChart id="votes" value="#{chartBean.livePieModel}" title="Resultado Enquete"  
-                legendPosition="nw" style="width:400px;height:300px;margin-left:50px;" showDataLabels="true"  sliceMargin="20" diameter="200"/>  
-					
-					
+					<!-- DIALOG GRÁFICO  -->
+
+					<br /> <br /> <br />
+
+					<h:panelGrid id="graficoResultado" columns="2">
+
+
+
+						<p:pieChart id="votes" value="#{chartBean.livePieModel}"
+							title="Resultado Enquete" legendPosition="nw"
+							style="width:400px;height:300px;margin-left:50px;"
+							showDataLabels="true" sliceMargin="20" diameter="200" />
+
+
 					</h:panelGrid>
-					<br />
-					<br />
-					<br />
-					<br />
+					<br /> <br /> <br /> <br />
 				</center>
 			</p:layoutUnit>
 		</p:layout>

@@ -24,7 +24,7 @@ public class AdministradorDAO implements InterfaceAdministrador {
 
 	/** 
 	 * @param administrador
-	 * @see Mï¿½todo responsï¿½vel por salvar os dados no BD
+	 * @see Mï¿½todo respons‡vel por salvar os dados no BD
 	 */
 	@SuppressWarnings("deprecation")
 	public boolean salvar(Administrador administrador) {   
@@ -143,6 +143,7 @@ public class AdministradorDAO implements InterfaceAdministrador {
 	public Administrador findByEmail(String email) {
 		System.out.println("Entrou no findByEmail");
 		 Session session = HibernateUtil.getSessionFactory().openSession(); 	
+		 Transaction t = session.beginTransaction();
 		 System.out.println("Abriu a session");
 		 Administrador retorno = (Administrador) session.createCriteria(Administrador.class).add(Restrictions.eq("email", email)).uniqueResult();
 		 return retorno;

@@ -21,6 +21,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.ServletContext;
+
+import org.primefaces.component.celleditor.CellEditor;
+import org.primefaces.component.celleditor.CellEditorRenderer;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 
@@ -164,11 +167,11 @@ public class Perguntas implements Serializable {
 		System.out.println("ENTROU NO EXCLUIR");
 		PerguntaDAO dao = new PerguntaDAO();
 
-		//CadastrarPergunta deletaPergunta = (CadastrarPergunta) (listarCadastrarPerguntas.getRowData());
-		//new ListDataModel(temp);
-		System.out.println(cadastrarPergunta.getId());
-		//List<CadastrarPergunta> temp = dao.excluir(cadastrarPergunta);
-		perguntasRelatorio = dao.excluir(cadastrarPergunta);
+		CadastrarPergunta deletaPergunta = (CadastrarPergunta) (listarCadastrarPerguntas.getRowData());
+		// new ListDataModel(temp);
+		//System.out.println(cadastrarPergunta.getId());
+		List<CadastrarPergunta> temp = dao.excluir(deletaPergunta);
+		//perguntasRelatorio = dao.excluir(cadastrarPergunta);
 				
 
 		if (listarCadastrarPerguntas != null) {
@@ -186,13 +189,29 @@ public class Perguntas implements Serializable {
 	 */
 	public void onEditRow(RowEditEvent event) {
 
-		CadastrarPergunta temp = (CadastrarPergunta) event.getObject();
-
+		
+		CadastrarPergunta temp = new CadastrarPergunta();
+		temp = (CadastrarPergunta) event.getObject();
+			
+	   System.out.println("IMPRIMIR VALOR ->" + temp.getValue());
+		
+	   
+	   
 		PerguntaDAO dao = new PerguntaDAO();
 		dao.update(temp);
 		enviarMensagem("Atualizado com sucesso");
 	}
 
+	
+public void onEditRow(CadastrarPergunta cads) {
+
+		
+		CadastrarPergunta temp = new CadastrarPergunta();
+		temp = cads;
+			
+		
+	}
+	
 	/**
 	 * @code Exibir coluna resposta correta quando seleciona coluna
 	 * @param event
@@ -290,6 +309,8 @@ public class Perguntas implements Serializable {
 				+ File.separator + "img_headerSIPA.png";
 
 		pdf.add(Image.getInstance(logo));
+		
+	
 	}
 
 	public void upload(FileUploadEvent event) {

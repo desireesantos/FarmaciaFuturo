@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>SIPA</title>
@@ -120,7 +121,9 @@ html,body {
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil" >
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false"   />
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
+							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 

@@ -13,6 +13,17 @@ html,body {
 	overflow: hidden !important;
 	position: relative !important;
 }
+
+.destacarRed
+{
+color:red;
+}
+
+.destacarBlue
+{
+color:blue;
+}
+}
 </style>
 </h:head>
 <h:body>
@@ -114,7 +125,9 @@ html,body {
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" ajax="false" />
+						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
+							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 
@@ -187,7 +200,7 @@ html,body {
 
 						<p:column id="ativar" style="width:4%" headerText="Ativar">
 							<p:commandButton id="selectButton" update=":formBuscar:enquete"
-								oncomplete="questionarioDialog.show()" icon="ui-icon-search"
+								oncomplete="questionarioDialog.show()" icon="ui-icon-search" 
 								title="View">
 								<f:setPropertyActionListener value="#{quiz}"
 									target="#{quizRealizadaMB.quizRealizada}" />
@@ -199,7 +212,7 @@ html,body {
 					<p:dialog id="enquete"
 						header=" Relatório"
 						widgetVar="questionarioDialog" resizable="false" width="500"
-						height="600" showEffect="drop" hideEffect="blind">
+						height="480" showEffect="drop" hideEffect="blind">
 
 						<center>
 							<h:outputText value="Data: " />
@@ -230,30 +243,24 @@ html,body {
 
 						<center>
 							<p:dataTable id="listaAlunos" var="user"
-								value="#{quizRealizadaMB.listarUsuarioRealizadas}"
-								paginator="true" rows="5"
-								emptyMessage="Nenhuma pergunta cadastrada.">
+								value="#{quizRealizadaMB.listarUsuarioRealizadas}" 
+								paginator="true" rows="5" rowKey="#{user.id}"  rowStyleClass="#{user.resposta ne quizRealizadaMB.quizRealizada.cadastrarPergunta.respostaCorreta ? 'destacarRed': 'destacarBlue'}"
+								emptyMessage="Não houve participaçao de aluno.">
 
 								<p:column style="width:auto">
-
 									<f:facet name="header">
 										<h:outputText value="Aluno(s)" />
 									</f:facet>
 									<h:outputText value="#{user.nome}" />
-
-
 								</p:column>
-								<p:column style="width:auto">
 
+								<p:column style="width:auto">
 									<f:facet name="header">
 										<h:outputText value="Resposta" />
 									</f:facet>
 									<h:outputText value="#{user.resposta}" />
-
-
 								</p:column>
-
-
+								
 							</p:dataTable>
 						</center>
 
@@ -262,28 +269,27 @@ html,body {
 
 
 						<h:panelGrid columns="2">
-							<p:panel header="Exportar Relatório" menuTitle="Relatório">
+								<p:panel header="Exportar Relatório" menuTitle="Relatório">
 
 								<h:commandLink>
 									<p:graphicImage value="/img/pdf.png" />
 									<p:dataExporter type="pdf" encoding="UTF-8"
-										target="questionario" fileName="sipa"
+										target="listaAlunos" fileName="sipa" pageOnly="true"
 										preProcessor="#{perguntas.preProcessPDF}" />
 								</h:commandLink>
 
 								<h:commandLink>
-									<p:graphicImage value="/img/csv.png" />
-									<p:dataExporter type="csv" target="questionario"
+									<p:graphicImage value="/img/csv.png" /> 
+									<p:dataExporter type="csv" target="listaAlunos" pageOnly="true"
 										fileName="sipa" />
 								</h:commandLink>
 
 								<h:commandLink>
 									<p:graphicImage value="/img/xml.png" />
-									<p:dataExporter type="xml" target="questionario"
+									<p:dataExporter type="xml" target="listaAlunos" pageOnly="true"
 										fileName="sipa" />
 								</h:commandLink>
 							</p:panel>
-
 
 						</h:panelGrid>
 

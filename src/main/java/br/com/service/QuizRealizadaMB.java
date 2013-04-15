@@ -30,6 +30,8 @@ public class QuizRealizadaMB implements Serializable {
 	
 	private List<Usuario> listarUsuarioRealizadas;
 	
+	private String respostaCorreta;
+	
 	private String btnIniciar;
 
 	public QuizRealizadaMB() {
@@ -56,7 +58,9 @@ public class QuizRealizadaMB implements Serializable {
 	}
 
 	public void setQuizRealizada(QuizRealizada quizRealizada) {
+		
 		this.quizRealizada = quizRealizada;
+		System.out.println("QUIZREALIZADA: "+ quizRealizada.getId());
 	}
 
 	@SuppressWarnings("unused")
@@ -116,22 +120,9 @@ public class QuizRealizadaMB implements Serializable {
 
 
 	public List<QuizRealizada> getListarQuizRealizadas() throws ParseException {
-		List<QuizRealizada> novaLista = new ArrayList<QuizRealizada>();
 		QuizRealizadaDAO dao = new QuizRealizadaDAO();
-	
-	
-		Date date;
-		String formatDate = "Dd/mm/yyyy hh:mm:ss";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatDate);
-		
-		for (QuizRealizada quizTemp :dao.listarQuizRealizadas()) {
-			date = quizTemp.getInicioDataHora();
-			
-				quizTemp.setInicioDataHora( simpleDateFormat.parse(simpleDateFormat.format(date))  );
-				novaLista.add(quizTemp);
-		}
-		
-		return listarQuizRealizadas = novaLista;
+    	
+		return listarQuizRealizadas = dao.listarQuizRealizadas();
 	}
 
 
@@ -145,15 +136,35 @@ public class QuizRealizadaMB implements Serializable {
 
 	public List<Usuario> getListarUsuarioRealizadas() {
 		QuizRealizadaDAO dao = new QuizRealizadaDAO();
-		listarUsuarioRealizadas = dao.listarUsuarioRealizadas(quizRealizada.getId());
+		List<Usuario> users = new ArrayList<Usuario>();
 		
+	
 		
-		return listarUsuarioRealizadas;
+		for (Usuario usuario : dao.listarUsuarioRealizadas()) {
+		
+			if (usuario.getQuiz() == quizRealizada.getId()) {
+				users.add(usuario);
+			}
+		}
+		
+		return users;
 	}
 
 
 	public void setListarUsuarioRealizadas(List<Usuario> listarUsuarioRealizadas) {
 		this.listarUsuarioRealizadas = listarUsuarioRealizadas;
+	}
+
+
+	public String getRespostaCorreta() {
+		
+		
+		return quizRealizada.getCadastrarPergunta().getRespostaCorreta() ;
+	}
+
+
+	public void setRespostaCorreta(String respostaCorreta) {
+		this.respostaCorreta = quizRealizada.getCadastrarPergunta().getRespostaCorreta();;
 	}
 	
 
