@@ -115,7 +115,7 @@ public class QuizRealizada {
 	}
 
 	public Date getInicioDataHora() {
-		//obterDataHora();	
+			
 		return inicioDataHora;
 	}
 

@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
-                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <h:head>
 	<title>SIPA</title>
+	<meta http-equiv="refresh" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<title>SIPA</title>
+
 	<style type="text/css">
 html,body {
 	height: 100% !important;
@@ -19,70 +23,196 @@ html,body {
 	position: relative !important;
 }
 </style>
+
+
 </h:head>
 <h:body>
-	<h:form id="menuForm">
+	<h:form id="menuForm" enctype="multipart/form-data">
 		<p:layout fullPage="true">
 
-
-			<!-- Banner RODAP� -->
-			<p:layoutUnit position="south" size="60">
+			<!-- Banner TOPO -->
+			<p:layoutUnit position="north" size="50">
 				<center>
 					<h:outputText
-						value=" SIPA - Sistema Interativo de Profici�ncia Acad�mica "
-						style="FONT-SIZE: small; FONT-FAMILY: 'Futura';" />
+						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						style="FONT-SIZE: xx-large; FONT-FAMILY: 'Futura';" />
 				</center>
 			</p:layoutUnit>
-			<!-- Fim Banner RODAP� -->
+			<!-- Fim Banner TOPO -->
 
 
-			<!-- Tela Login -->
+			<!-- Banner RODAPÉ -->
+			<p:layoutUnit position="south" size="60">
+				<h:outputLabel value="Conectividade: " style="font-weight:bold" />
+				<h:outputText value="#{trocarTema.nomeConectividade}" />
+			</p:layoutUnit>
+			<!-- Fim Banner RODAPÉ -->
+
+
+			<!-- Banner CARROSEL -->
+			<p:layoutUnit position="east" size="200">
+				<p:carousel rows="1" itemStyle="height:400px;width:180px;"
+					autoPlayInterval="4000" effect="elasticIn" circular="true">
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_enquete.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab>
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/img/img_sipa.jpg" />
+
+						</h:panelGrid>
+					</p:tab>
+				</p:carousel>
+			</p:layoutUnit>
+			<!-- Fim Banner CARROSEL -->
+
+
+
+			<!-- Menu -->
 			<p:layoutUnit position="center">
 
+				<p:menubar>
+					<p:menuitem value="Home"
+						url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+						icon="ui-icon-home" />
+					<!-- 	     Início Menu Conectividade  -->
+					<p:submenu label="Conectividade" icon="ui-icon-gear">
 
+						<p:menuitem value="Controle Remoto" style="font-size:16"
+							ajax="false">
+
+							<f:setPropertyActionListener value="humanity"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Controle Remoto"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Bluetooth" ajax="false">
+							<f:setPropertyActionListener value="start"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Bluetooth"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+						<p:menuitem value="Web" ajax="false">
+							<f:setPropertyActionListener value="sunny"
+								target="#{trocarTema.tema}" />
+
+							<f:setPropertyActionListener value="Web"
+								target="#{trocarTema.nomeConectividade}" />
+						</p:menuitem>
+
+					</p:submenu>
+					<!-- 	     Fim Menu Conectividade     -->
+
+
+
+					<!-- Menu Questionário   -->
+					<p:submenu label="Questionario" icon="ui-icon-pencil">
+
+						<p:menuitem value="Cadastrar Pergunta" url="cadastrar.xhtml"
+							process="@form" immediate="true">
+							
+						</p:menuitem>
+
+						<p:menuitem value="Cadastrar Aluno" url="aluno.xhtml"
+							process="@form" immediate="true">
+							
+						</p:menuitem>
+
+						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
+
+						<!-- Fim Menu Questionario -->
+
+					</p:submenu>
+
+
+					<!-- Fim Menu Questionário   -->
+
+
+					<!-- Menu Relatório  -->
+					<p:submenu label="Relatório" icon="ui-icon-document">
+
+						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
+							ajax="false" />
+
+					</p:submenu>
+
+
+					<!-- Menu Ajuda  -->
+					<p:submenu label="Ajuda" icon="ui-icon-info">
+
+						<p:menuitem value="Manual do usuario" url="manualUsuario.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Crédito" url="credito.xhtml"
+							style="font-size:16" ajax="false" />
+						<p:menuitem value="Versão" url="versao.xhtml" style="font-size:16"
+							ajax="false" />
+
+
+					</p:submenu>
+					<!-- Fim Menu  -->
+
+				</p:menubar>
+
+
+
+
+
+				<!-- Conteúdo Cadastrar -->
 				<center>
-					<br />
+					<DIV id="logo" style="display: inline;">
+						<p:commandLink id="sair"
+							actionListener="#{administradorMB.logout}">
+							<h:outputText value="Sair"
+								style="margin-left:980px;FONT-FAMILY:'Al Bayan'; FONT-SIZE:large; COLOR: #2e36ed;" />
+						</p:commandLink>
 
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage value="/img/img_headerSIPA.png" height=" 200"
-							width="1000" />
+						<h2>Cadastrar Alunos</h2>
 
+						<h3></h3>
+					</DIV>
+
+					<!-- Inicio Pergunta -->
+					<p:growl id="messages" life="3000" showDetail="false" />
+
+			<p:panel id="cadastroAluno" header="Conectividade Controle Remoto">  
+					<h:panelGrid columns="2"  columnClasses="column" cellpadding="5" ajax="false">
+					
+						<h:outputText value="CR1:" />
+							<p:inputText id="cr1"  value="#{alunoMB.alunoCR.nomeCR1}" required="true"
+								label="text" size="40" />
+							
+					
+						<h:outputText value="CR2:" />
+							<p:inputText  id="cr2" value="#{alunoMB.alunoCR.nomeCR2}" required="true"
+								label="text"  size="40" />
+								
+						
+						<br />
+							<br />
+						<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
+							icon="ui-icon-circle-check" action="#{alunoMB.salvar}" >
+							
+							</p:commandButton>
 					</h:panelGrid>
-
-
-					<!-- Inicio Logar -->
-					<p:growl id="messages" life="3000" />
-
-					<h:panelGrid id="gridCadastrarAluno" columns="2"
-						style="margin-top:10px" ajax="false">
-
-						<h:outputText value="Controle Remoto 1: " />
-						<p:inputText id="cr1"
-							value="#{administradorMB.administrador.nome}" size="50"
-							required="true" label="Nome Completo" />
-
-						<h:outputText value="Controle Remoto 2: " />
-						<p:inputText id="cr1"
-							value="" size="50"
-							required="true" label="Nome Completo" />
-
-						<center>
-							<p:commandButton id="submitBtn" value="Cadastrar" ajax="false"
-								action="#{administradorMB.salvar}" />
-						</center>
-
-
-					</h:panelGrid>
-
-
-					<br /> <br /> <br /> <br />
-					<h:outputText value="Clique "
-						style="FONT-SIZE: medium;margin-left:220px;" />
-					<h:link value="Voltar" outcome="apresentacao"
-						style="FONT-SIZE: medium;" />
-
+					
+					
+			</p:panel>
 				</center>
 
+				<!-- Fim Conteúdo Cadastrar -->
 
 
 

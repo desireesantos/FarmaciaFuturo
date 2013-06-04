@@ -9,7 +9,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>SIPA</title>
+	<title>Farmacia do Futuro</title>
 	<style type="text/css">
 		html, body { 
     height:      100% !important; 
@@ -25,11 +25,11 @@
 			id="layout">
 
 			<!-- Topo com Figura -->
-			<p:layoutUnit position="north" resizable="false" size="100"
+			<p:layoutUnit position="north" resizable="false" size="90"
 				minSize="40" maxSize="600">
 
 				<center>
-					<p:graphicImage value="/img/img_headerSIPA.png" height=" 80"
+					<p:graphicImage value="/img/farmacia.jpeg" height=" 70"
 						width="900" />
 				</center>
 
@@ -40,28 +40,46 @@
 			<p:layoutUnit position="west" resizable="true" size="800"
 				minSize="40" maxSize="600">
 
-				<br />
-				<br />
-				<br />
-				<h:outputText value="Seu voto é importante ! "
-					style="FONT-FAMILY: 'Al Bayan'; FONT-SIZE: x-large; COLOR: #2e36ed;margin-left:100px;margin-top:100px;" />
-				<br />
-				<br />
-				<h:outputText value="Votação no SIPA é rápido, fácil e divertido !"
-					style="FONT-SIZE: large; COLOR: #2c2c2c; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
-				<br />
-				<h:outputText
-					value="Não é necessário se cadastrar para votar."
-					style="FONT-SIZE: large; COLOR: #2c2c2c; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
-				<br />
-				<h:outputText value=""
-					style="FONT-SIZE: large; COLOR: #2c2c2c; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
-				<br />
+				
+				<br />	
 				<br />
 				<br />
 
-				<p:button outcome="votar" value="Clique aqui para votar"
-					alt="Botao Votar" rendered="#{trocarTema.status}" style="margin-left:250px;" />
+				<h:outputText value="Pacientes Cadastrados "
+					style="FONT-FAMILY: 'Al Bayan'; FONT-SIZE: x-large; COLOR: #2e36ed;margin-left:100px;" />
+				<br />
+				<br />
+				
+				<h:outputText
+					value="Efetue o login caso  possua cadastro no sistema "
+					style="COLOR: #2c2c2c; FONT-SIZE: small; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
+				<br /><br />
+
+				<h:panelGrid  columns="2" style="margin-left:100px;"
+					ajax="false">
+					
+					<h:outputText value="Email: " />
+					<p:inputText size="32" 
+						value="#{administradorMB.administrador.email}" required="true"
+						label="Email" />
+
+					<h:outputText value="Senha: " />
+					<p:password 
+						value="#{administradorMB.administrador.senha}" required="true"
+						label="Senha" feedback="false" size="10" />
+					<br />
+				</h:panelGrid>
+				<p:commandButton value="Logar" ajax="false"
+					style="margin-left:365px;" action="#{administradorMB.login}" />
+				<br />
+				<p:spacer width="60" />
+				<h:outputText value="Não possui cadastro ? "
+					style="COLOR: #2e36ed; FONT-SIZE: small; FONT-FAMILY: 'Al Bayan';margin-left:40px;" />
+				<br />
+				<h:outputText value="Para se cadastrar no sistema clique "
+					style="COLOR: #2c2c2c; FONT-SIZE: small; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
+				<h:link value="aqui" outcome="registrar" />
+		
 			</p:layoutUnit>
 
 			<!--  Lado Direito -->
@@ -72,7 +90,7 @@
 				<br />
 				<br />
 
-				<h:outputText value="Usuários Cadastrados "
+				<h:outputText value="Médicos Cadastrados "
 					style="FONT-FAMILY: 'Al Bayan'; FONT-SIZE: x-large; COLOR: #2e36ed;margin-left:100px;" />
 				<br />
 				<br />
@@ -110,7 +128,7 @@
 			<p:layoutUnit position="south" minSize="10" maxSize="900" style="COLOR: #2c2c2c; FONT-SIZE: small; FONT-FAMILY: 'Al Bayan';">
 				<center>
 					<h:outputText
-						value="SIPA - Sistema Interativo de Proficiência Acadêmica" />
+						value="Farmácia do Futuro - CopyLeft" />
 				</center>
 			</p:layoutUnit>
 		</p:layout>

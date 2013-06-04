@@ -121,8 +121,17 @@ public class QuizRealizadaMB implements Serializable {
 
 	public List<QuizRealizada> getListarQuizRealizadas() throws ParseException {
 		QuizRealizadaDAO dao = new QuizRealizadaDAO();
-    	
-		return listarQuizRealizadas = dao.listarQuizRealizadas();
+    	List<QuizRealizada> lista = new ArrayList<QuizRealizada>();
+		
+		for (QuizRealizada quiz : dao.listarQuizRealizadas()) {
+			
+			if ( !(quiz.getId() % 2 == 0) ) {
+				lista.add(quiz);
+			}
+		}
+    	   	
+		
+		return listarQuizRealizadas = lista ;
 	}
 
 

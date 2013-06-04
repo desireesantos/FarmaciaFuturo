@@ -125,10 +125,14 @@ color:blue;
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
-							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
-						</p:menuitem>
+						<p:menuitem value="Cadastrar Pergunta" url="cadastrar.xhtml"
+							process="@form" immediate="true"/>
+							
+				
 
+						<p:menuitem value="Cadastrar Aluno" url="aluno.xhtml"
+							process="@form" immediate="true"/>
+							
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 
 						<!-- Fim Menu Questionario -->
@@ -183,7 +187,7 @@ color:blue;
 							</f:facet>
 							
 								<h:outputText value="#{quiz.inicioDataHora}" >
-									  <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/> 
+									  <f:convertDateTime pattern="dd/MM/yyyy"/> 
 								</h:outputText>
 	
 						</p:column>
@@ -220,7 +224,7 @@ color:blue;
 								value="#{quizRealizadaMB.quizRealizada.inicioDataHora}"
 								style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan'; " >
 								
-								 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/> 
+								 <f:convertDateTime pattern="dd/MM/yyyy" type="both" /> 
 								</h:outputText>
 							<br /> <br />
 

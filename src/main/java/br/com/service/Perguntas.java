@@ -37,6 +37,7 @@ import br.com.infraestrutura.AdministradorDAO;
 import br.com.infraestrutura.PerguntaDAO;
 import br.com.infraestrutura.QuizRealizadaDAO;
 import br.com.bean.AdminLogado;
+import br.com.bean.AlunoCR;
 import br.com.bean.CadastrarPergunta;
 import br.com.bean.ChartBean;
 import br.com.bean.QuizRealizada;
@@ -52,6 +53,7 @@ public class Perguntas implements Serializable {
 	private final static String[] opcoes;
 	private List<CadastrarPergunta> perguntasRelatorio;
 	private String btnIniciar;
+	private AlunoCR alunoCR = new AlunoCR();
 
 
 	static {
@@ -159,7 +161,7 @@ public class Perguntas implements Serializable {
 	}
 
 	/**
-	 * Deleta do banco a pergunta que está no objeto cadastrarPergunta, que foi
+	 * Deleta do banco a pergunta que esta no objeto cadastrarPergunta, que foi
 	 * setado na view.
 	 */
 	public void  excluir() {
@@ -230,6 +232,15 @@ public void onEditRow(CadastrarPergunta cads) {
 		cadastrarPergunta = new CadastrarPergunta();
 	}
 
+	
+	/**
+	 * Limpar tela
+	 */
+	public void limpaTelaAluno() {
+
+		alunoCR = new AlunoCR();
+	}
+	
 	/**
 	 * Exibir mensagem na tela
 	 * 
@@ -404,6 +415,7 @@ public void onEditRow(CadastrarPergunta cads) {
 			this.btnIniciar = "Iniciar";
 		}
 		System.out.println("Enquete:" + btnIniciar);
+		
 
 	}
 

@@ -1,5 +1,6 @@
 package br.com.bean;
 
+
 import java.io.Serializable;
 
 import javax.persistence.DiscriminatorColumn;

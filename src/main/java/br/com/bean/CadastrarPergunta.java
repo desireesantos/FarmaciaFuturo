@@ -61,6 +61,7 @@ public class CadastrarPergunta implements Serializable {
 	}
 
 	public String getValue() {
+		
 		return value;
 	}
 

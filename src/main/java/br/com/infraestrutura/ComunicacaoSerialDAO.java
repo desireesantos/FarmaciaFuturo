@@ -35,24 +35,42 @@ public class ComunicacaoSerialDAO {
 		Usuario user = new Usuario();
 		UsuarioDAO userDao = new UsuarioDAO();
  
-		System.out.println(" ===> " + listaDados.isEmpty() ); 
+		//System.out.println(" ===> " + listaDados.isEmpty() ); 
 		int x = 1;
 		for (Iterator it = listaDados.iterator(); it.hasNext();) {
 			Object[] row = (Object[]) it.next();
 
 			String resposta = (String) row[1];
-			System.out.println("ESTOU NO FOR");	
+			//System.out.println("ESTOU NO FOR");	
 			user.setNome(resposta.substring(0, 3));
-			user.setResposta(resposta.substring(2, 3));
+			user.setResposta(resposta.substring(3, 4));
 			user.setQuiz(idQuiz);
 			userDao.salvar(user);
-			System.out.println("Imprimir valor na tela CRS: "+ user.getNome() + " - "+ user.getResposta());
+			System.out.println("Imprimir valor na tela CRS: "+ user.getNome() + " - "+ user.getResposta());			
 			
 		}
 
+		
 		tx.commit();
-		//excluirTudo();
+		
 
+	}
+
+	private void deletarUmRegistro() {
+		
+		AnnotationConfiguration configuration = new AnnotationConfiguration();
+		configuration.configure();
+
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+
+
+		@SuppressWarnings("unchecked")
+		Query query = session.createSQLQuery("delete from participante where id=  ( select max(id) from participante);");
+		
+		tx.commit();
+		
 	}
 
 	public void excluirTudo() {

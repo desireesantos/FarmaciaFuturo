@@ -29,6 +29,7 @@
 		<mapping class="br.com.bean.AdminLogado"/>
 		<mapping class="br.com.bean.Participante" />
 		<mapping class="br.com.bean.QuizRealizada"/>
+		<mapping class="br.com.bean.AlunoCR"/>
 
 	</session-factory>
 </hibernate-configuration>

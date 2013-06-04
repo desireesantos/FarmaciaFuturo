@@ -142,17 +142,25 @@ public class UsuarioDAO implements InterfaceUsuario {
                String stringIdQuiz =  String.valueOf(id_quiz);
                String stringQuiz =  String.valueOf(quiz);
                 
+              
                if (stringQuiz.equalsIgnoreCase(stringIdQuiz) && respostaCerta.equalsIgnoreCase(resposta)) {
 				somarPontoCorreto++;
 			} 
+               
+               
                if (stringQuiz.equalsIgnoreCase(stringIdQuiz) && !respostaCerta.equalsIgnoreCase(resposta)) {
             	somarPontoErrado++;
    			} 
-            
+              
+               System.out.println(":::"+ stringIdQuiz +" - "+ stringQuiz + "- "+ stringQuiz.equalsIgnoreCase(stringIdQuiz) );
+               System.out.println(":::"+ respostaCerta +" - "+ resposta + "- "+ respostaCerta.equalsIgnoreCase(resposta));
 		}
+		
 		
         pontos[0]=somarPontoCorreto;
         pontos[1]=somarPontoErrado;
+        System.out.println("somarPontoCorreto:--->  " +  pontos[0]);
+		System.out.println("somarPontoErrado: ---> " +  pontos[1]);
         return pontos;	
 				
 	}

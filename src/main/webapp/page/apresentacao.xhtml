@@ -30,7 +30,7 @@ html,body {
 			<p:layoutUnit position="north" size="50">
 				<center>
 					<h:outputText
-						value=" SIPA - Sistema Interativo de Proficiência Acadêmica "
+						value=" Farmácia do Futuro "
 						style="FONT-SIZE: xx-large; FONT-FAMILY: 'Futura';" />
 
 
@@ -41,146 +41,39 @@ html,body {
 			<!-- Fim Banner TOPO -->
 
 
-			<!-- Banner RODAPÉ -->
-			<p:layoutUnit position="south" size="60">
-				<h:outputLabel value="Conectividade: " style="font-weight:bold" />
-				<h:outputText value="#{trocarTema.nomeConectividade}"
-					style="FONT-SIZE: medium;" />
-			</p:layoutUnit>
-			<!-- Fim Banner RODAPÉ -->
-
-
-			<!-- Banner CARROSEL -->
-			<p:layoutUnit position="east" size="200">
-				<p:carousel rows="1" itemStyle="height:400px;width:170px;"
-					autoPlayInterval="4000" effect="elasticIn" circular="true">
-					<p:tab>
-						<h:panelGrid columns="2" cellpadding="10">
-							<p:graphicImage value="/img/img_sipa.jpg" />
-
-						</h:panelGrid>
-					</p:tab>
-					<p:tab>
-						<h:panelGrid columns="2" cellpadding="10">
-							<p:graphicImage value="/img/img_enquete.jpg" />
-
-						</h:panelGrid>
-					</p:tab>
-					<p:tab>
-						<h:panelGrid columns="2" cellpadding="10">
-							<p:graphicImage value="/img/img_sipa.jpg" />
-
-						</h:panelGrid>
-					</p:tab>
-				</p:carousel>
-			</p:layoutUnit>
-			<!-- Fim Banner CARROSEL -->
-
-
-
 			<!-- Banner Conteúdo Principal -->
 			<p:layoutUnit position="center">
 
 				<p:menubar>
 					<p:menuitem value="Home"
-						url="http://localhost:8080/ClickerBrOn/page/apresentacao.xhtml"
+						url="http://localhost:8080/FarmaciaFuturo/page/apresentacao.xhtml"
 						icon="ui-icon-home" style="margin-left:30px;" />
 
-					<!-- 	     Início Menu Conectividade  -->
-					<p:submenu label="Conectividade" icon="ui-icon-gear">
-
-						<p:menuitem value="Controle Remoto" style="font-size:16"
-							ajax="false">
-
-							<f:setPropertyActionListener value="humanity"
-								target="#{trocarTema.tema}" />
-
-							<f:setPropertyActionListener value="false"
-								target="#{trocarTema.status}" />
-
-							<f:setPropertyActionListener value="Controle Remoto"
-								target="#{trocarTema.nomeConectividade}" />
-						</p:menuitem>
-
-						<p:menuitem value="Bluetooth" ajax="false">
-							<f:setPropertyActionListener value="start"
-								target="#{trocarTema.tema}" />
-
-							<f:setPropertyActionListener value="false"
-								target="#{trocarTema.status}" />
-
-							<f:setPropertyActionListener value="Bluetooth"
-								target="#{trocarTema.nomeConectividade}" />
-						</p:menuitem>
-
-						<p:menuitem value="Web" ajax="false">
-							<f:setPropertyActionListener value="sunny"
-								target="#{trocarTema.tema}" />
-								
-								<f:setPropertyActionListener value="true"
-								target="#{trocarTema.status}" />
-
-							<f:setPropertyActionListener value="Web"
-								target="#{trocarTema.nomeConectividade}" />
-						</p:menuitem>
-
-					</p:submenu>
-					<!-- 	     Fim Menu Conectividade     -->
-
-
+					
 
 					<!-- Início Menu Questionário - Cadastrar Perguntas  -->
-					<p:submenu label="Questionario" icon="ui-icon-pencil">
+					<p:submenu label="Cadastrar" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
-							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						<p:menuitem value="Receita" url="cadastrar.xhtml"
+							process="@form" immediate="true">
+							<f:event type="preRenderView" listener="#{perguntas.limpaTela}" />
 						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
 					</p:submenu>
 					<!-- Fim Menu Questionario -->
 
-					<!-- Menu Relatório  -->
-					<p:submenu label="Relatório" icon="ui-icon-document">
-						<p:menuitem value="Gerar Relatório" url="relatorio.xhtml"
-							style="font-size:16" ajax="false" />
-
-					</p:submenu>
-					<!-- Fim Menu Relatório  -->
-
-					<!-- Menu Ajuda  -->
-					<p:submenu label="Ajuda" icon="ui-icon-info">
-
-						<p:menuitem value="Manual Uso" url="manualUsuario.xhtml"
-							style="font-size:16" ajax="false" />
-						<p:menuitem value="Crédito" url="credito.xhtml"
-							style="font-size:16" ajax="false" />
-						<p:menuitem value="Versão" url="versao.xhtml" style="font-size:16"
-							ajax="false" />
-					</p:submenu>
-					<!-- Fim Menu Relatório  -->
 				</p:menubar>
 
 
 
 
 				<!-- Imagem Tela Principal -->
-				<p:commandLink id="sair" actionListener="#{administradorMB.logout}" >
+				<p:commandLink id="sair" actionListener="#{administradorMB.logout}">
 					<h:outputText value="Sair"
 						style="margin-left:900px;FONT-FAMILY: 'Al Bayan'; FONT-SIZE:large; COLOR: #2e36ed;" />
 				</p:commandLink>
-				<center>
-					<br />
-					<br />
-
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage value="/img/img_fundo_sipa.png" height="300" />
-
-					</h:panelGrid>
-
-
-				</center>
-
+				
 				<!-- Fim Imagem Tela Principal -->
 
 

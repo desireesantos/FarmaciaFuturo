@@ -17,7 +17,6 @@ public class ChartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private PieChartModel livePieModel;
-	private String chamarDialog= "";
 	private int quantidadeAcerto = 0;
 	private int quantidadeErro = 0;
 
@@ -66,7 +65,7 @@ public class ChartBean implements Serializable {
 			System.out.println("++++++ Conectividade do quiz: Controle Remoto ++++++");
 			
 			ComunicacaoSerialDAO serialDao = new ComunicacaoSerialDAO();
-			serialDao.usuariosOrigemCR(id_quiz);
+			serialDao.usuariosOrigemCR(id_quiz - 1);
 			
 		}
 	  

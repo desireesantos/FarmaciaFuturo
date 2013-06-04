@@ -120,8 +120,13 @@ html,body {
 					<!-- Menu Questionário   -->
 					<p:submenu label="Questionario" icon="ui-icon-pencil">
 
-						<p:menuitem value="Cadastrar" url="cadastrar.xhtml" process="@form"  immediate="true" >						
-							 <f:event type="preRenderView" listener="#{perguntas.limpaTela}"  />
+						<p:menuitem value="Cadastrar Pergunta" url="cadastrar.xhtml"
+							process="@form" immediate="true">
+						</p:menuitem>
+
+						<p:menuitem value="Cadastrar Aluno" url="aluno.xhtml"
+							process="@form" immediate="true">
+						
 						</p:menuitem>
 
 						<p:menuitem value="Buscar" url="buscar.xhtml" ajax="false" />
@@ -245,13 +250,8 @@ html,body {
 						</p:column>
 						
 
-
-
 						<p:column id="editInfo" headerText="Editar">
-
 							<p:rowEditor />
-							
-
 						</p:column>
 
 						<p:column id="editarColuna" headerText="Apagar" style="width:auto;" >
@@ -271,65 +271,62 @@ html,body {
 									<p:commandButton value="Não" onclick="cd.hide();" type="button" />
 								</center>
 							</p:confirmDialog>
-
-
 						</p:column>
 
 
 						<p:column id="ativar" style="width:4%" headerText="Ativar">
-							<p:commandButton id="selectButton" update=":formBuscar:enquete"
+							<p:commandButton id="selectButton" update=":formBuscar:listarPergunta"
 								actionListener="#{perguntas.ativarEnquete}"
 								oncomplete="questionarioDialog.show()" icon="ui-icon-search"
 								title="View">
 								<f:setPropertyActionListener value="#{perg}"
 									target="#{perguntas.cadastrarPergunta}" />
 							</p:commandButton>
-
-
-
-
 						</p:column>
 					</p:dataTable>
 				</center>
 
-				<p:dialog id="enquete"
+				<p:dialog id="listarPergunta" 
 					header=" SIPA - Sistema Interativo de Proficiência Academica"
-					widgetVar="questionarioDialog" resizable="false" width="900"
+					widgetVar="questionarioDialog" resizable="false" width="500"
 					height="500" showEffect="drop" hideEffect="blind">
 
 					<center>
 						<p:graphicImage value="/img/logo_sipa.jpg" width="160"
 							height="180" />
 					</center>
+					
 					<p:spacer width="50" height="20" />
 
-
+					
+					<center>
 					<h:outputText value="#{perguntas.cadastrarPergunta.value}"
-						style="FONT-SIZE:large; COLOR: #2e36ed; FONT-FAMILY: 'Al Bayan';margin-left:100px;" />
+						style="color: #2e36ed;font-size:x-large;margin-left:10px;font-family: 'Al Bayan';" />
+					</center>	
 					<br />
 					<br />
 
-
+					<h:outputText value="1."/>
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta1}"
-						style="margin-left:100px;" />
+						style="margin-left:40px;" />
 					<br />
 					<br />
 
-
+					<h:outputText value="2."/>
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta2}"
-						style="margin-left:100px;" />
+						style="margin-left:40px;" />
 					<br />
 					<br />
 
-
+					<h:outputText value="3."/>
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta3}"
-						style="margin-left:100px;" />
+						style="margin-left:40px;" />
 					<br />
 					<br />
 
-
+					<h:outputText value="4."/>
 					<h:outputText value="#{perguntas.cadastrarPergunta.resposta4}"
-						style="margin-left:100px" />
+						style="margin-left:40px" />
 					<br />
 					<br />
 
