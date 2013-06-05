@@ -9,12 +9,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import br.com.bean.AdminLogado;
+
 import br.com.bean.Administrador;
-import br.com.bean.Participante;
 import br.com.infraestrutura.AdministradorDAO;
 
-public class AdministradorMBean extends Participante implements Serializable {
+public class AdministradorMBean  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +28,7 @@ public class AdministradorMBean extends Participante implements Serializable {
 	}
 
 	public Administrador getAdministrador() {
-		System.out.println("Nome user:" + administrador.getNome());
+		
 		return administrador;
 	}
 
@@ -116,30 +115,30 @@ public class AdministradorMBean extends Participante implements Serializable {
 		admin = dao.findByEmail(administrador.getEmail());
 		System.out.println("Email do Banco: " + admin.getEmail());
 		
-	
-		if (admin.getEmail().equals(administrador.getEmail())
-				&& admin.getSenha().equals(administrador.getSenha())) {
-			status = "sucesso";
-			
-			AdminLogado adminLogado = new AdminLogado();
-			Administrador ad = new Administrador(); 
-			ad = dao.findByEmail(administrador.getEmail()); 
-			adminLogado.setNome(ad.getNome());
-			adminLogado.setEmail(ad.getEmail());
-			System.out.println("----adminLogado: "+ adminLogado.getNome());
-			dao.salvarLogado(adminLogado);
-			
-			System.out.println(status);
-			limpaTela();
-			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("/ClickerBrOn/page/apresentacao.xhtml");
-		} else {
-			enviarMensagem("Tente novamente!");
-			status = "fracasso";
-			System.out.println(status);
-			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("login.xhtml");
-		}
+//	
+//		if (admin.getEmail().equals(administrador.getEmail())
+//				&& admin.getSenha().equals(administrador.getSenha())) {
+//			status = "sucesso";
+//			
+//			
+//			Administrador ad = new Administrador(); 
+//			ad = dao.findByEmail(administrador.getEmail()); 
+//			
+//			adminLogado.setEmail(ad.getEmail());
+//			System.out.println("----adminLogado: "+ adminLogado.getNome());
+//			dao.salvarLogado(adminLogado);
+//			
+//			System.out.println(status);
+//			limpaTela();
+//			FacesContext.getCurrentInstance().getExternalContext()
+//					.redirect("/ClickerBrOn/page/apresentacao.xhtml");
+//		} else {
+//			enviarMensagem("Tente novamente!");
+//			status = "fracasso";
+//			System.out.println(status);
+//			FacesContext.getCurrentInstance().getExternalContext()
+//					.redirect("login.xhtml");
+//		}
 		return status;
 	}
 

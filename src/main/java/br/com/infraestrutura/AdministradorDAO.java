@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.bean.AdminLogado;
+
 import br.com.bean.Administrador;
 import br.com.service.InterfaceAdministrador;
 import br.com.util.HibernateUtil;
@@ -37,8 +37,7 @@ public class AdministradorDAO implements InterfaceAdministrador {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
 
-		System.out.println("Nome do administrador:"+ administrador.getNome());
-		System.out.println("Session Factory"+ session.getSessionFactory());
+		
 		
 		Transaction tx = session.beginTransaction();
 		session.save(administrador);
@@ -49,23 +48,7 @@ public class AdministradorDAO implements InterfaceAdministrador {
 	}
 	
 	
-	public boolean salvarLogado( AdminLogado adminLogado) {   
-
-		Configuration configuration = new Configuration();
-		configuration.configure();
-
-		
-		@SuppressWarnings("deprecation")
-		SessionFactory factory = new Configuration().configure().buildSessionFactory();
-		Session session = factory.openSession();
-		
-		Transaction tx = session.beginTransaction();
-		session.save(adminLogado);
-		
-		tx.commit();
-		return true;
-		
-	}
+	
 	
 	public String  findLogadoByEmail() {
 		 Session session = HibernateUtil.getSessionFactory().openSession(); 	

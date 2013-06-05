@@ -6,8 +6,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 
-import br.com.bean.Participante;
-
 
 /**
  * Entity implementation class for Entity: Administrador
@@ -15,13 +13,12 @@ import br.com.bean.Participante;
  */
 @Entity
 @DiscriminatorValue("A")
-public class Administrador extends Participante implements Serializable{
+public class Administrador  implements Serializable{
 	private static final long serialVersionUID = 1L;
-
 	
 	private String email;
 	private String senha;
-	private Participante participante;
+	
 		
 
 	public Administrador() 
@@ -37,9 +34,7 @@ public class Administrador extends Participante implements Serializable{
 	}
 
 
-	public Participante getParticipante() {
-		return participante;
-	}
+	
 
 	
 	public String getEmail() {
@@ -59,13 +54,7 @@ public class Administrador extends Participante implements Serializable{
 
 
 
-	public void setParticipante(Participante participante) {
-		this.participante = participante;
-	}
-
 	
-
-
 
 		
 }
